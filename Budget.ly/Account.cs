@@ -14,6 +14,18 @@ namespace Budget.ly
         private ItemList finances;
         private AccountHistory accountHistory;
 
+        public Account()
+        {
+
+            this.setFirstName("");
+            this.setLastName("");
+            this.accountBalance = 0;
+            this.goal = null;
+            this.finances = new ItemList();
+            this.accountHistory = new AccountHistory() {};
+
+        }
+
         public Account(string firstName, string lastName, float accountBalance) : base (firstName, lastName)
         {
           
