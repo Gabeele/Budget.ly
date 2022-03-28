@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    internal class Account
+    public class Account : User, Subject
     {
 
         float accountBalance;
         Goal goal;
         List<Item> finances;
+        private List<Observer> observers;
 
         public Account(float accountBalance)
         {
@@ -19,6 +20,7 @@ namespace Budget.ly
             this.accountBalance = accountBalance;
             this.goal = goal;
             this.finances = new List<Item>();
+            observers = new List<Observer>();
 
         }
 
@@ -29,14 +31,14 @@ namespace Budget.ly
             this.goal=goal;
             this.finances = new List<Item>();
             this.finances = finances;
-                        
+            observers = new List<Observer>();
         }
 
         public void setBalance(float balance)
         {
 
             this.accountBalance = balance;
-
+            notfiyObservers();
         }
 
         public float getBalance()
@@ -48,16 +50,30 @@ namespace Budget.ly
 
         public void setGoal(Goal goal)
         {
-
             this.goal = goal;
-
+            notfiyObservers();
         }
 
         public Goal getGoal()
         {
-
             return this.goal;
+        }
+        public void registerObserver(Observer o)
+        {
+            observers.Add(o);
+        }
 
+        public void removeObserver(Observer o)
+        {
+            observers.Remove(o);
+        }
+
+        public void notfiyObservers()
+        {
+            foreach(Observer observer in observers)
+            {
+                observer.update();
+            }
         }
 
     }
