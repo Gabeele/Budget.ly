@@ -11,7 +11,7 @@ namespace Budget.ly
 
         private float accountBalance;
         private Goal goal;
-        private List<Item> finances;
+        private ItemList finances;
         private AccountHistory accountHistory;
 
         public Account(string firstName, string lastName, float accountBalance) : base (firstName, lastName)
@@ -19,17 +19,17 @@ namespace Budget.ly
           
             this.accountBalance = accountBalance;
             this.goal = null;
-            this.finances = new List<Item>() {};
+            this.finances = new ItemList();
             this.accountHistory = new AccountHistory() {};
         
         }
 
-        public Account(string firstName, string lastName, float accountBalance, Goal goal, List<Item> finances, AccountHistory accountHistory) : base (firstName, lastName)
+        public Account(string firstName, string lastName, float accountBalance, Goal goal, ItemList finances, AccountHistory accountHistory) : base (firstName, lastName)
         {
 
             this.accountBalance=accountBalance;
             this.goal=goal;
-            this.finances = new List<Item>() {};
+            this.finances = new ItemList();
             this.finances = finances;
             this.accountHistory = new AccountHistory() {};
             this.accountHistory = accountHistory;
@@ -63,15 +63,15 @@ namespace Budget.ly
             return this.goal;
 
         }
-        public void setFinances(List<Item> finances)
+        public void setFinances(ItemList finances)
         {
             
-            this.finances = new List<Item>();
+            this.finances = new ItemList();
             this.finances = finances;
 
         }
 
-        public List<Item> getFinances()
+        public ItemList getFinances()
         {
 
             return this.finances;
