@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    enum ITEM_TYPE { Expense, Bill, Income, Gain, None };
+    public enum ITEM_TYPE { Expense, Bill, Income, Gain, None };
 
-    class Item
+    public class Item
     {
         protected float amount;
         protected string label;
@@ -21,14 +21,14 @@ namespace Budget.ly
             itemType = ITEM_TYPE.None;
         }
 
-        public Item(int amount, string label)
+        public Item(float amount, string label)
         {
             this.amount = amount;
             this.label = label;
             this.itemType = ITEM_TYPE.None;
         }
 
-        public void SetAmount(int amount)
+        public void SetAmount(float amount)
         {
             this.amount = amount;
         }

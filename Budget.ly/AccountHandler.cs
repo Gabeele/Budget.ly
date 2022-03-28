@@ -7,12 +7,12 @@ using System.IO;
 
 namespace Budget.ly
 {
-    class AccountHandler : Observer
+    public class AccountHandler : Observer
     {
         private Account acc;
         private float balance;
         private Goal goal;
-        private List<Item> finances;
+        private Items finances;
         private string name = @"\Account.txt";
 
         public AccountHandler(Account acc)
@@ -53,9 +53,10 @@ namespace Budget.ly
 
                 string[] words = line.Split(',');
 
-                newAcc.setBalance = words[0];
-                newAcc.setGoal = words[1];
-                newAcc.setFinance = words[2];
+                //TODO: Change how the words are processed
+                //newAcc.setBalance(words[0]);
+                //newAcc.setGoal(words[1]);
+                //newAcc.setFinance(words[2]);
             }
 
             return newAcc;

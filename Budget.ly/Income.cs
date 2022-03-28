@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    class Income : Gain
+    public class Income : Gain
     {
         private int billInterval;
 

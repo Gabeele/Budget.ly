@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    class Expense :  Item
+    public class Expense :  Item
     {
         protected DateTime date;
 
-        public Expense(int amount, string label, DateTime date) : base(amount, label)
+        public Expense(float amount, string label, DateTime date) : base(amount, label)
         {
             this.date = date;
         }

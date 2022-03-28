@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    class ItemIterator : Iterator
+    public class ItemIterator : Iterator
     {
         private List<Item> elements;
         private int index = 0;

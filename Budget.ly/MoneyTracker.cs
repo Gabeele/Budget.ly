@@ -17,7 +17,7 @@ namespace Budget.ly
             float reoccuringCashFlow = (totalIncome(account) - totalBill(account));
             float oneTimeCashFlow = (totalGain(account) - totalExpense(account));
 
-         
+            return null;    //TODO return the date
         }
 
         static public float averageItem(Account account)

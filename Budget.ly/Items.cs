@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    class Items : Aggregate
+    public class Items : Aggregate
     {
         List<Item> items = new List<Item>();
 

@@ -7,61 +7,46 @@ using System.Threading.Tasks;
 namespace Budget.ly
 {
 
-    public class Account : User
+
+    public class Account : User, Subject
     {
 
         private float accountBalance;
         private Goal goal;
         private Items finances;
         private AccountHistory accountHistory;
-
-    public class Account : User, Subject
-    {
-
-        float accountBalance;
-        Goal goal;
-        List<Item> finances;
         private List<Observer> observers;
-
 
         public Account()
         {
 
-
-            this.setFirstName("");
-            this.setLastName("");
             this.accountBalance = 0;
             this.goal = null;
             this.finances = new Items();
-            this.accountHistory = new AccountHistory() {};
-
-            this.accountBalance = accountBalance;
-            this.goal = goal;
-            this.finances = new List<Item>();
+            this.accountHistory = new AccountHistory() { };
             observers = new List<Observer>();
-
 
         }
 
-        public Account(string firstName, string lastName, float accountBalance) : base (firstName, lastName)
+        public Account(string firstName, string lastName, float accountBalance) : base(firstName, lastName)
         {
-          
+
             this.accountBalance = accountBalance;
             this.goal = null;
             this.finances = new Items();
-            this.accountHistory = new AccountHistory() {};
-        
+            this.accountHistory = new AccountHistory() { };
+
         }
 
-        public Account(string firstName, string lastName, float accountBalance, Goal goal, ItemList finances, AccountHistory accountHistory) : base (firstName, lastName)
+        public Account(string firstName, string lastName, float accountBalance, Goal goal, Items finances, AccountHistory accountHistory) : base(firstName, lastName)
         {
 
-            this.accountBalance=accountBalance;
-            this.goal=goal;
+            this.accountBalance = accountBalance;
+            this.goal = goal;
             this.finances = new Items();
             this.finances = finances;
 
-            this.accountHistory = new AccountHistory() {};
+            this.accountHistory = new AccountHistory() { };
             this.accountHistory = accountHistory;
 
 
@@ -105,14 +90,14 @@ namespace Budget.ly
 
         public void notfiyObservers()
         {
-            foreach(Observer observer in observers)
+            foreach (Observer observer in observers)
             {
                 observer.update();
             }
         }
         public void setFinances(Items finances)
         {
-            
+
             this.finances = new Items();
             this.finances = finances;
 
@@ -155,4 +140,6 @@ namespace Budget.ly
         }
 
     }
+
 }
+

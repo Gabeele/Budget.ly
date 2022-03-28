@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    class Gain : Item
+    public class Gain : Item
     {
         protected DateTime date;
 
-        public Gain(int amount, string label, DateTime date) : base(amount, label)
+        public Gain(float amount, string label, DateTime date) : base(amount, label)
         {
             this.date = date;
         }
 
-        new public void SetAmount(int amount)
+        new public void SetAmount(float amount)
         {
             if (amount < 0)
                 this.amount = amount;

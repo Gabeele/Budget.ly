@@ -9,8 +9,14 @@ namespace Budget.ly
     public class User
     {
         
-        private string firstName;
-        private string lastName;
+        protected string firstName;
+        protected string lastName;
+
+        public User()
+        {
+            this.firstName = null;
+            this.lastName = null;
+        }
 
         public User(string firstName, string lastName)
         {

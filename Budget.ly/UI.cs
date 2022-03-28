@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    class UI
+    public class UI
     {
         private Account account;
 
@@ -106,14 +106,71 @@ namespace Budget.ly
         private void addExpense()
         {
 
-            Expense exp( float amount, string description, DateTime date);
+            Expense exp = new Expense(amount, label , date);
             account.item.Add(exp);
         }
 
-        private void addGainz()
+        private void addGainz(int amount, string label, DateTime date)
         {
-            Gain gain( float amount, string description, DateTime date);
+            Gain gain = new Gain(amount, label, date);
             account.item.Add(gain);
+        }
+
+        private void itemInput()
+        {
+            string label, amount_str;
+            int amount;
+            DateTime date;
+
+            Console.WriteLine("Enter in label: ");
+            label = Console.ReadLine();
+
+            do
+            {
+                Console.WriteLine("Enter in the amount: ");
+                amount_str = Console.ReadLine();
+
+            } while (amount_str.All(char.IsDigit));
+
+            amount = int.Parse(amount_str);
+
+            date = getDate();
+
+        }
+
+        private float getAmount()
+        {
+            string amount_str;
+            int amount;
+
+            do
+            {
+                Console.WriteLine("Enter in the amount: ");
+                float.TryParse(Console.ReadLine(), out amount);
+
+            } while (amount_str.All(char.IsDigit));
+
+            amount = float.TryParse(amount_str);
+
+            return amount;
+        }
+
+        private DateTime getDate()
+        {
+           
+            Console.Write("Enter a month: ");
+            int month = int.Parse(Console.ReadLine());
+
+            Console.Write("Enter a day: ");
+            int day = int.Parse(Console.ReadLine());
+
+            Console.Write("Enter a year: ");
+            int year = int.Parse(Console.ReadLine());
+
+            DateTime date = new DateTime(year, month, day);
+
+            return date;
+
         }
 
         private void viewRecurringBill()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    interface Iterator
+    public interface Iterator
     {
         bool hasNext();
 

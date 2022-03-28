@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    class Bill : Expense
+    public class Bill : Expense
     {
         private int billInterval;
 
-        public Bill(int amount, string label, DateTime date, int billInterval) : base (amount, label, date)
+        public Bill(float amount, string label, DateTime date, int billInterval) : base (amount, label, date)
         {
             SetBillInterval(billInterval);
         }
