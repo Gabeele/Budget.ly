@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    public class ItemIterator : Iterator
+    public class ItemIterator : IIterator
     {
         private List<Item> elements;
         private int index = 0;
@@ -16,14 +16,14 @@ namespace Budget.ly
             elements = new List<Item>(items.GetItems());
         }
 
-        public bool hasNext()
+        public bool HasNext()
         {
             return index < elements.Count();
         }
 
-        public object next()
+        public object Next()
         {
-            if (hasNext())
+            if (HasNext())
             {
                 return elements.ElementAt(index++);
             }

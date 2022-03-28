@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    interface Aggregate
+    interface IAggregate
     {
-        Iterator iterator();
+        IIterator Iterator();
+
     }
 }

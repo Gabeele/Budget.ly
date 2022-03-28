@@ -19,7 +19,7 @@ namespace Budget.ly
 
         }
 
-        public void addMilestone(Milestone milestone)
+        public void AddMilestone(Milestone milestone)
         {
 
             accountHistory.Add(milestone);

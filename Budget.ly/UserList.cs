@@ -18,14 +18,14 @@ namespace Budget.ly
 
         }
 
-        void addUser(User user)
+        void AddUser(User user)
         {
 
             this.userList.Add(user);
 
         }
 
-        void removeUser(User user)
+        void RemoveUser(User user)
         {
 
             foreach (User listedUser in this.userList)

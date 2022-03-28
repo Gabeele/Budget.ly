@@ -8,14 +8,14 @@ namespace Budget.ly
 {
 
 
-    public class Account : User, Subject
+    public class Account : User, ISubject
     {
 
         private float accountBalance;
         private Goal goal;
         private Items finances;
         private AccountHistory accountHistory;
-        private List<Observer> observers;
+        private List<IObserver> observers;
 
         public Account()
         {
@@ -24,7 +24,7 @@ namespace Budget.ly
             this.goal = null;
             this.finances = new Items();
             this.accountHistory = new AccountHistory() { };
-            observers = new List<Observer>();
+            observers = new List<IObserver>();
 
         }
 
@@ -50,52 +50,52 @@ namespace Budget.ly
             this.accountHistory = accountHistory;
 
 
-            observers = new List<Observer>();
+            observers = new List<IObserver>();
 
         }
 
-        public void setBalance(float balance)
+        public void SetBalance(float balance)
         {
 
             this.accountBalance = balance;
-            notfiyObservers();
+            NotfiyObservers();
         }
 
-        public float getBalance()
+        public float GetBalance()
         {
 
             return this.accountBalance;
 
         }
 
-        public void setGoal(Goal goal)
+        public void SetGoal(Goal goal)
         {
             this.goal = goal;
-            notfiyObservers();
+            NotfiyObservers();
         }
 
-        public Goal getGoal()
+        public Goal GetGoal()
         {
             return this.goal;
         }
-        public void registerObserver(Observer o)
+        public void RegisterObserver(IObserver o)
         {
             observers.Add(o);
         }
 
-        public void removeObserver(Observer o)
+        public void RemoveObserver(IObserver o)
         {
             observers.Remove(o);
         }
 
-        public void notfiyObservers()
+        public void NotfiyObservers()
         {
-            foreach (Observer observer in observers)
+            foreach (IObserver observer in observers)
             {
-                observer.update();
+                observer.Update();
             }
         }
-        public void setFinances(Items finances)
+        public void SetFinances(Items finances)
         {
 
             this.finances = new Items();
@@ -103,39 +103,39 @@ namespace Budget.ly
 
         }
 
-        public Items getFinances()
+        public Items GetFinances()
         {
 
             return this.finances;
 
         }
 
-        public void setAccountHistory(AccountHistory accountHistory)
+        public void SetAccountHistory(AccountHistory accountHistory)
         {
 
             this.accountHistory = accountHistory;
 
         }
 
-        public AccountHistory getAccountHistory()
+        public AccountHistory GetAccountHistory()
         {
 
             return this.accountHistory;
 
         }
 
-        private void createMilestone()
+        private void CreateMilestone()
         {
 
-            Milestone milestone = new Milestone(this.accountBalance);
-            this.accountHistory.addMilestone(milestone);
+            Milestone milestone = new (this.accountBalance);
+            this.accountHistory.AddMilestone(milestone);
 
         }
 
-        public void updateHistory()
+        public void UpdateHistory()
         {
 
-            createMilestone();
+            CreateMilestone();
 
         }
 

@@ -15,7 +15,7 @@ namespace Budget.ly
             this.date = date;
         }
 
-        new public void SetAmount(int amount)
+        public void SetAmount(int amount)
         {
             if (amount < 0)
                 this.amount = amount;

@@ -28,7 +28,7 @@ namespace Budget.ly
             do
             {
                 Console.WriteLine("Budget.ly - Budget Goal Software\n\n");
-                Console.WriteLine("Balance: %d Goal: %d\n", account.getBalance(), account.getGoal());
+                Console.WriteLine("Balance: %d Goal: %d\n", account.GetBalance(), account.GetGoal());
                 Console.WriteLine("Avg Expense: %d Avg Gain: %d On target: %d\n", ExpenseAverage(), GainAverage(), GoalStatus());
                 Console.WriteLine("\t1] Add expense\n\t2] Add Gain\n\t3] View reoccuring bills\n\t4] View reoccuring income\n0] Exit\n\t");
 

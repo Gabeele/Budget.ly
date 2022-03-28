@@ -17,14 +17,14 @@ namespace Budget.ly
 
         }
 
-        public void setAccountBalance(float accountBalance)
+        public void SetAccountBalance(float accountBalance)
         {
             
             this.accountBalance = accountBalance;
 
         }
 
-        public float getAccountBalance()
+        public float GetAccountBalance()
         {
 
             return this.accountBalance;

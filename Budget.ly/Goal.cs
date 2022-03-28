@@ -30,49 +30,49 @@ namespace Budget.ly
 
         }
 
-        public void setDescription(string description)
+        public void SetDescription(string description)
         {
 
             this.description = description;
 
         }
 
-        public string getDescription()
+        public string GetDescription()
         {
 
             return this.description;
 
         }
 
-        public void setTargetAmount(float targetAmount)
+        public void SetTargetAmount(float targetAmount)
         {
 
             this.targetAmount = targetAmount;
 
         }
 
-        public void setTargetAmount(int targetAmount)
+        public void SetTargetAmount(int targetAmount)
         {
 
             this.targetAmount = (float)targetAmount;
 
         }
 
-        public float getTargetAmount()
+        public float GetTargetAmount()
         {
 
             return this.targetAmount;
 
         }
 
-        public void setDate(DateTime date)
+        public void SetDate(DateTime date)
         {
 
             this.date = date;
 
         }
 
-        public DateTime getDate()
+        public DateTime GetDate()
         {
 
             return this.date;

@@ -6,7 +6,7 @@ namespace Budget.ly
     {
         static void Main(string[] args)
         {
-            UI ui = new UI();
+            UI ui = new();
             ui.selectAccount();
         }
     }

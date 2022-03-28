@@ -9,36 +9,38 @@ namespace Budget.ly
     static public class MoneyTracker
     {
 
-        static public DateTime calculate(Account account)
+        static public DateTime Calculate(Account account)
         {
+            DateTime tempTime;
+            
             //Calculates the amount of 'intervals' it will take for the account to reach its goal, based on income and expense items of the account.
-            float tempGoalAmount = account.getGoal().getTargetAmount();
+            float tempGoalAmount = account.GetGoal().GetTargetAmount();
 
-            float reoccuringCashFlow = (totalIncome(account) - totalBill(account));
-            float oneTimeCashFlow = (totalGain(account) - totalExpense(account));
+            float reoccuringCashFlow = (TotalIncome(account) - TotalBill(account));
+            float oneTimeCashFlow = (TotalGain(account) - TotalExpense(account));
 
-            return null;    //TODO return the date
+            return tempTime;    //TODO return the date
         }
 
-        static public float averageItem(Account account)
+        static public float AverageItem(Account account)
         {
 
-            return ((averageBill(account) + averageExpense(account) + averageIncome(account) + averageGain(account)) / 4);
+            return ((AverageBill(account) + AverageExpense(account) + AverageIncome(account) + AverageGain(account)) / 4);
 
         }
 
-        static public float averageBill(Account account)
+        static public float AverageBill(Account account)
         {
 
             float sumOfBills = 0;
             int numBills = 0;
 
-            Items tempFinances = account.getFinances();
+            Items tempFinances = account.GetFinances();
 
-            while (tempFinances.iterator().hasNext())
+            while (tempFinances.Iterator().HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.iterator().next();
+                Item tempItem = (Item)tempFinances.Iterator().Next();
        
                 if (tempItem.GetItemType() == ITEM_TYPE.Bill)
                 {
@@ -54,18 +56,18 @@ namespace Budget.ly
 
         }
 
-        static public float averageExpense(Account account)
+        static public float AverageExpense(Account account)
         {
 
             float sumOfExpenses = 0;
             int numExpenses = 0;
 
-            Items tempFinances = account.getFinances();
+            Items tempFinances = account.GetFinances();
 
-            while (tempFinances.iterator().hasNext())
+            while (tempFinances.Iterator().HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.iterator().next();
+                Item tempItem = (Item)tempFinances.Iterator().Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Expense)
                 {
@@ -81,18 +83,18 @@ namespace Budget.ly
 
         }
 
-        static public float averageIncome(Account account)
+        static public float AverageIncome(Account account)
         {
 
             float sumOfIncome = 0;
             int numIncome = 0;
 
-            Items tempFinances = account.getFinances();
+            Items tempFinances = account.GetFinances();
 
-            while (tempFinances.iterator().hasNext())
+            while (tempFinances.Iterator().HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.iterator().next();
+                Item tempItem = (Item)tempFinances.Iterator().Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Income)
                 {
@@ -108,18 +110,18 @@ namespace Budget.ly
 
         }
 
-        static public float averageGain(Account account)
+        static public float AverageGain(Account account)
         {
 
             float sumOfGain = 0;
             int numGain = 0;
 
-            Items tempFinances = account.getFinances();
+            Items tempFinances = account.GetFinances();
 
-            while (tempFinances.iterator().hasNext())
+            while (tempFinances.Iterator().HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.iterator().next();
+                Item tempItem = (Item)tempFinances.Iterator().Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Gain)
                 {
@@ -135,17 +137,17 @@ namespace Budget.ly
 
         }
 
-        static public float totalBill(Account account)
+        static public float TotalBill(Account account)
         {
 
             float sumOfBills = 0;
 
-            Items tempFinances = account.getFinances();
+            Items tempFinances = account.GetFinances();
 
-            while (tempFinances.iterator().hasNext())
+            while (tempFinances.Iterator().HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.iterator().next();
+                Item tempItem = (Item)tempFinances.Iterator().Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Gain)
                 {
@@ -160,17 +162,17 @@ namespace Budget.ly
 
         }
 
-        static public float totalExpense(Account account)
+        static public float TotalExpense(Account account)
         {
 
             float sumOfExpenses = 0;
 
-            Items tempFinances = account.getFinances();
+            Items tempFinances = account.GetFinances();
 
-            while (tempFinances.iterator().hasNext())
+            while (tempFinances.Iterator().HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.iterator().next();
+                Item tempItem = (Item)tempFinances.Iterator().Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Expense)
                 {
@@ -185,17 +187,17 @@ namespace Budget.ly
 
         }
 
-        static public float totalIncome(Account account)
+        static public float TotalIncome(Account account)
         {
 
             float sumOfIncome = 0;
 
-            Items tempFinances = account.getFinances();
+            Items tempFinances = account.GetFinances();
 
-            while (tempFinances.iterator().hasNext())
+            while (tempFinances.Iterator().HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.iterator().next();
+                Item tempItem = (Item)tempFinances.Iterator().Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Income)
                 {
@@ -210,18 +212,18 @@ namespace Budget.ly
 
         }
 
-        static public float totalGain(Account account)
+        static public float TotalGain(Account account)
         {
 
             float sumOfGain = 0;
 
-            Items tempFinances = account.getFinances();
+            Items tempFinances = account.GetFinances();
 
 
-            while (tempFinances.iterator().hasNext())
+            while (tempFinances.Iterator().HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.iterator().next();
+                Item tempItem = (Item)tempFinances.Iterator().Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Gain)
                 {
