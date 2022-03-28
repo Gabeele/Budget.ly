@@ -11,7 +11,7 @@ namespace Budget.ly
 
         private float accountBalance;
         private Goal goal;
-        private ItemList finances;
+        private Items finances;
         private AccountHistory accountHistory;
 
         public Account()
@@ -21,7 +21,7 @@ namespace Budget.ly
             this.setLastName("");
             this.accountBalance = 0;
             this.goal = null;
-            this.finances = new ItemList();
+            this.finances = new Items();
             this.accountHistory = new AccountHistory() {};
 
         }
@@ -31,7 +31,7 @@ namespace Budget.ly
           
             this.accountBalance = accountBalance;
             this.goal = null;
-            this.finances = new ItemList();
+            this.finances = new Items();
             this.accountHistory = new AccountHistory() {};
         
         }
@@ -41,7 +41,7 @@ namespace Budget.ly
 
             this.accountBalance=accountBalance;
             this.goal=goal;
-            this.finances = new ItemList();
+            this.finances = new Items();
             this.finances = finances;
             this.accountHistory = new AccountHistory() {};
             this.accountHistory = accountHistory;
@@ -75,15 +75,15 @@ namespace Budget.ly
             return this.goal;
 
         }
-        public void setFinances(ItemList finances)
+        public void setFinances(Items finances)
         {
             
-            this.finances = new ItemList();
+            this.finances = new Items();
             this.finances = finances;
 
         }
 
-        public ItemList getFinances()
+        public Items getFinances()
         {
 
             return this.finances;

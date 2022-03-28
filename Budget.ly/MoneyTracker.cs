@@ -33,7 +33,7 @@ namespace Budget.ly
             float sumOfBills = 0;
             int numBills = 0;
 
-            ItemList tempFinances = account.getFinances();
+            Items tempFinances = account.getFinances();
 
             foreach (Bill bill in tempFinances)
             {
@@ -51,7 +51,7 @@ namespace Budget.ly
             float sumOfExpenses = 0;
             int numExpenses = 0;
 
-            ItemList tempFinances = account.getFinances();
+            Items tempFinances = account.getFinances();
 
             foreach (Expense expense in tempFinances)
             {
@@ -69,7 +69,7 @@ namespace Budget.ly
             float sumOfIncome = 0;
             int numIncome = 0;
 
-            ItemList tempFinances = account.getFinances();
+            Items tempFinances = account.getFinances();
 
             foreach (Income income in tempFinances)
             {
@@ -87,7 +87,7 @@ namespace Budget.ly
             float sumOfGain = 0;
             int numGain = 0;
 
-            ItemList tempFinances = account.getFinances();
+            Items tempFinances = account.getFinances();
 
             foreach (Income income in tempFinances)
             {
@@ -104,7 +104,7 @@ namespace Budget.ly
 
             float sumOfBills = 0;
 
-            ItemList tempFinances = account.getFinances();
+            Items tempFinances = account.getFinances();
 
             foreach (Bill bill in tempFinances)
             {
@@ -120,7 +120,7 @@ namespace Budget.ly
 
             float sumOfExpenses = 0;
 
-            ItemList tempFinances = account.getFinances();
+            Items tempFinances = account.getFinances();
 
             foreach (Expense expense in tempFinances)
             {
@@ -136,7 +136,7 @@ namespace Budget.ly
 
             float sumOfIncome = 0;
 
-            ItemList tempFinances = account.getFinances();
+            Items tempFinances = account.getFinances();
 
             foreach (Income income in tempFinances)
             {
@@ -152,7 +152,7 @@ namespace Budget.ly
 
             float sumOfGain = 0;
 
-            ItemList tempFinances = account.getFinances();
+            Items tempFinances = account.getFinances();
 
             foreach (Income income in tempFinances)
             {
