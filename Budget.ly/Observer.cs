@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    public interface Observer
+    public interface IObserver
     {
-        public void update();
+        public void Update();
 
     }
 }

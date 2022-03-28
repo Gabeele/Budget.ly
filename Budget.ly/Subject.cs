@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    interface Subject
+    interface ISubject
     {
-        public void registerObserver(Observer o);
+        public void RegisterObserver(IObserver o);
 
-        public void removeObserver(Observer o);
+        public void RemoveObserver(IObserver o);
 
-        public void notfiyObservers();
+        public void NotfiyObservers();
 
     }
 }

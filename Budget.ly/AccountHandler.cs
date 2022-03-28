@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Budget.ly
 {
-    public class AccountHandler : Observer
+    public class AccountHandler : IObserver
     {
         private Account acc;
         private float balance;
@@ -18,17 +18,17 @@ namespace Budget.ly
         public AccountHandler(Account acc)
         {
             this.acc = acc;
-            acc.registerObserver(this);
+            acc.RegisterObserver(this);
         }
 
-        public void update()
+        public void Update()
         {
-            this.balance = acc.getBalance();
-            this.goal = acc.getGoal();
-            this.finances = acc.getFinances();
+            this.balance = acc.GetBalance();
+            this.goal = acc.GetGoal();
+            this.finances = acc.GetFinances();
         }
 
-        void writeToFile(float balance, Goal g, List<Item> fin)
+        void WriteToFile(float balance, Goal g, List<Item> fin)
         {
             TextWriter writer = new StreamWriter(name);
            
@@ -42,9 +42,9 @@ namespace Budget.ly
             writer.Close();
         }
 
-        Account readFromFile()
+        Account ReadFromFile()
         {
-            Account newAcc = new Account();
+            Account newAcc = new();
 
             string[] allLines = File.ReadAllLines(name);
 

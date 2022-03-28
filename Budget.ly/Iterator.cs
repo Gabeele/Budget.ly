@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    public interface Iterator
+    public interface IIterator
     {
-        bool hasNext();
+        public bool HasNext();
 
-        Object next();
+        public Object Next();
     }
 }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    public class Items : Aggregate
+    public class Items : IAggregate
     {
-        List<Item> items = new List<Item>();
+        List<Item> items = new ();
 
-        public Iterator iterator()
+        public IIterator Iterator()
         {
             return new ItemIterator(this);
         }

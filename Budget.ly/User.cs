@@ -26,28 +26,28 @@ namespace Budget.ly
 
         }
 
-        public void setFirstName(string firstName)
+        public void SetFirstName(string firstName)
         {
 
             this.firstName=firstName;
 
         }
 
-        public void setLastName(string lastName)
+        public void SetLastName(string lastName)
         {
 
             this.lastName=lastName;
 
         }
 
-        public string getFirstName()
+        public string GetFirstName()
         {
 
             return this.firstName;
 
         }
 
-        public string getLastName()
+        public string GetLastName()
         {
 
             return this.lastName;
