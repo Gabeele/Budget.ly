@@ -14,7 +14,7 @@ namespace Budget.ly
         private List<Item> finances;
         private AccountHistory accountHistory;
 
-        public Account(string firstName, string lastName, float accountBalance) : base(firstName, lastName)
+        public Account(string firstName, string lastName, float accountBalance) : base (firstName, lastName)
         {
           
             this.accountBalance = accountBalance;
