@@ -35,10 +35,19 @@ namespace Budget.ly
 
             Items tempFinances = account.getFinances();
 
-            foreach (Bill bill in tempFinances)
+            while (tempFinances.iterator().hasNext())
             {
-                sumOfBills += bill.getAmount();
-                numBills++;
+
+                Item tempItem = (Item)tempFinances.iterator().next();
+       
+                if (tempItem.GetItemType() == ITEM_TYPE.Bill)
+                {
+
+                    sumOfBills += tempItem.GetAmount();
+                    numBills++;
+
+                }
+
             }
 
             return (sumOfBills / numBills);
@@ -53,10 +62,19 @@ namespace Budget.ly
 
             Items tempFinances = account.getFinances();
 
-            foreach (Expense expense in tempFinances)
+            while (tempFinances.iterator().hasNext())
             {
-                sumOfExpenses += expense.getAmount();
-                numExpenses++;
+
+                Item tempItem = (Item)tempFinances.iterator().next();
+
+                if (tempItem.GetItemType() == ITEM_TYPE.Expense)
+                {
+
+                    sumOfExpenses += tempItem.GetAmount();
+                    numExpenses++;
+
+                }
+
             }
 
             return (sumOfExpenses / numExpenses);
@@ -71,10 +89,19 @@ namespace Budget.ly
 
             Items tempFinances = account.getFinances();
 
-            foreach (Income income in tempFinances)
+            while (tempFinances.iterator().hasNext())
             {
-                sumOfIncome += income.getAmount();
-                numIncome++;
+
+                Item tempItem = (Item)tempFinances.iterator().next();
+
+                if (tempItem.GetItemType() == ITEM_TYPE.Income)
+                {
+
+                    sumOfIncome += tempItem.GetAmount();
+                    numIncome++;
+
+                }
+
             }
 
             return (sumOfIncome / numIncome);
@@ -89,10 +116,19 @@ namespace Budget.ly
 
             Items tempFinances = account.getFinances();
 
-            foreach (Income income in tempFinances)
+            while (tempFinances.iterator().hasNext())
             {
-                sumOfGain += income.getAmount();
-                numGain++;
+
+                Item tempItem = (Item)tempFinances.iterator().next();
+
+                if (tempItem.GetItemType() == ITEM_TYPE.Gain)
+                {
+
+                    sumOfGain += tempItem.GetAmount();
+                    numGain++;
+
+                }
+
             }
 
             return (sumOfGain / numGain);
@@ -106,9 +142,18 @@ namespace Budget.ly
 
             Items tempFinances = account.getFinances();
 
-            foreach (Bill bill in tempFinances)
+            while (tempFinances.iterator().hasNext())
             {
-                sumOfBills += bill.getAmount();
+
+                Item tempItem = (Item)tempFinances.iterator().next();
+
+                if (tempItem.GetItemType() == ITEM_TYPE.Gain)
+                {
+
+                    sumOfBills += tempItem.GetAmount();
+
+                }
+
             }
 
             return sumOfBills;
@@ -122,9 +167,18 @@ namespace Budget.ly
 
             Items tempFinances = account.getFinances();
 
-            foreach (Expense expense in tempFinances)
+            while (tempFinances.iterator().hasNext())
             {
-                sumOfExpenses += expense.getAmount();
+
+                Item tempItem = (Item)tempFinances.iterator().next();
+
+                if (tempItem.GetItemType() == ITEM_TYPE.Expense)
+                {
+
+                    sumOfExpenses += tempItem.GetAmount();
+
+                }
+
             }
 
             return sumOfExpenses;
@@ -138,9 +192,18 @@ namespace Budget.ly
 
             Items tempFinances = account.getFinances();
 
-            foreach (Income income in tempFinances)
+            while (tempFinances.iterator().hasNext())
             {
-                sumOfIncome += income.getAmount();
+
+                Item tempItem = (Item)tempFinances.iterator().next();
+
+                if (tempItem.GetItemType() == ITEM_TYPE.Income)
+                {
+
+                    sumOfIncome += tempItem.GetAmount();
+
+                }
+
             }
 
             return sumOfIncome;
@@ -154,9 +217,19 @@ namespace Budget.ly
 
             Items tempFinances = account.getFinances();
 
-            foreach (Income income in tempFinances)
+
+            while (tempFinances.iterator().hasNext())
             {
-                sumOfGain += income.getAmount();
+
+                Item tempItem = (Item)tempFinances.iterator().next();
+
+                if (tempItem.GetItemType() == ITEM_TYPE.Gain)
+                {
+
+                    sumOfGain += tempItem.GetAmount();
+
+                }
+
             }
 
             return sumOfGain;
