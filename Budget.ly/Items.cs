@@ -19,5 +19,10 @@ namespace Budget.ly
         {
             return items;
         }
+
+        public void add(Item item)
+        {
+            items.Add(item);
+        }
     }
 }

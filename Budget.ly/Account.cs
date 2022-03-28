@@ -54,6 +54,11 @@ namespace Budget.ly
 
         }
 
+        public void addItem(Item item)
+        {
+            this.finances.add(item); 
+        }
+
         public void setBalance(float balance)
         {
 

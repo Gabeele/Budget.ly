@@ -21,6 +21,21 @@ namespace Budget.ly
             //Option to select the account
         }
 
+        public void printUsers()
+        {
+
+            AccountList uList = new AccountList();
+
+           //Has to print out the entire account list and allow users to pick from that
+           //Then set the account to the menu account
+
+            Console.WriteLine("%s %s", )
+
+
+            
+
+        }
+
         public bool PrintMenu()
         {
             bool isRunning = true;
@@ -72,10 +87,16 @@ namespace Budget.ly
                 switch (option)
                 {
                     case 1:
-                        addExpense();
+                        addExpense(getAmount(), getLabel(), getDate());
                         break;
                     case 2:
-                        addGainz();
+                        addGainz(getAmount(), getLabel(), getDate());
+                        break;
+                    case 3:
+                        addRecurringGainz(getAmount(), getLabel(), getDate());
+                        break;
+                    case 4:
+                        addRecurringGainz(getAmount(), getLabel(), getDate());
                         break;
                     case 3:
                         viewRecurringBill();
@@ -103,54 +124,46 @@ namespace Budget.ly
             return null;
         }
 
-        private void addExpense()
+        private void addExpense(float amount, string label, DateTime date)
         {
 
             Expense exp = new Expense(amount, label , date);
-            account.item.Add(exp);
+            account.addItem(exp);
         }
 
-        private void addGainz(int amount, string label, DateTime date)
+        private void addGainz(float amount, string label, DateTime date)
         {
             Gain gain = new Gain(amount, label, date);
-            account.item.Add(gain);
+            account.addItem(gain);
         }
 
-        private void itemInput()
+        private string getLabel()
         {
-            string label, amount_str;
-            int amount;
-            DateTime date;
+            string label;
 
             Console.WriteLine("Enter in label: ");
             label = Console.ReadLine();
 
-            do
-            {
-                Console.WriteLine("Enter in the amount: ");
-                amount_str = Console.ReadLine();
-
-            } while (amount_str.All(char.IsDigit));
-
-            amount = int.Parse(amount_str);
-
-            date = getDate();
-
+            return label;
         }
-
+        
         private float getAmount()
         {
             string amount_str;
-            int amount;
+            float amount;
+            bool isDigit = false;
 
             do
             {
+                
                 Console.WriteLine("Enter in the amount: ");
-                float.TryParse(Console.ReadLine(), out amount);
+                if(!float.TryParse(Console.ReadLine(), out amount))
+                {
+                    isDigit = true;
+                    break;
+                }
 
-            } while (amount_str.All(char.IsDigit));
-
-            amount = float.TryParse(amount_str);
+            } while (!isDigit);
 
             return amount;
         }
