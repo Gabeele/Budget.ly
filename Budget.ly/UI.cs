@@ -8,6 +8,7 @@ namespace Budget.ly
 {
     public class UI
     {
+        
         private Account account;
 
 
@@ -16,25 +17,32 @@ namespace Budget.ly
            
         }
 
-        public void selectAccount()
+        public UI(Account account)
         {
-            //Option to select the account
+            this.account = account;
         }
 
-        public void printUsers()
+        public void createAccount()
+        {
+            Console.WriteLine("Enter in First Name: ");
+            String firstName = Console.ReadLine();
+            Console.WriteLine("Enter in Last Name: ");
+            String lastName = Console.ReadLine();
+
+            float balance = getAmount();
+             
+
+            this.account = new Account(firstName, lastName, balance);
+        }
+
+        public void getAccount()
         {
 
-            AccountList uList = new AccountList();
 
-           //Has to print out the entire account list and allow users to pick from that
-           //Then set the account to the menu account
-
-            Console.WriteLine("%s %s", )
-
-
-            
 
         }
+
+
 
         public bool PrintMenu()
         {
