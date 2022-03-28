@@ -6,30 +6,34 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    internal class Account
+    public class Account : User
     {
 
-        float accountBalance;
-        Goal goal;
-        List<Item> finances;
+        private float accountBalance;
+        private Goal goal;
+        private List<Item> finances;
+        private AccountHistory accountHistory;
 
-        public Account(float accountBalance)
+        public Account(string firstName, string lastName, float accountBalance) : base(firstName, lastName)
         {
-
+          
             this.accountBalance = accountBalance;
-            this.goal = goal;
-            this.finances = new List<Item>();
-
+            this.goal = null;
+            this.finances = new List<Item>() {};
+            this.accountHistory = new AccountHistory() {};
+        
         }
 
-        public Account(float accountBalance, Goal goal, List<Item> finances)
+        public Account(string firstName, string lastName, float accountBalance, Goal goal, List<Item> finances, AccountHistory accountHistory) : base (firstName, lastName)
         {
 
             this.accountBalance=accountBalance;
             this.goal=goal;
-            this.finances = new List<Item>();
+            this.finances = new List<Item>() {};
             this.finances = finances;
-                        
+            this.accountHistory = new AccountHistory() {};
+            this.accountHistory = accountHistory;
+
         }
 
         public void setBalance(float balance)
@@ -57,6 +61,49 @@ namespace Budget.ly
         {
 
             return this.goal;
+
+        }
+        public void setFinances(List<Item> finances)
+        {
+            
+            this.finances = new List<Item>();
+            this.finances = finances;
+
+        }
+
+        public List<Item> getFinances()
+        {
+
+            return this.finances;
+
+        }
+
+        public void setAccountHistory(AccountHistory accountHistory)
+        {
+
+            this.accountHistory = accountHistory;
+
+        }
+
+        public AccountHistory getAccountHistory()
+        {
+
+            return this.accountHistory;
+
+        }
+
+        private void createMilestone()
+        {
+
+            Milestone milestone = new Milestone(this.accountBalance);
+            this.accountHistory.addMilestone(milestone);
+
+        }
+
+        public void updateHistory()
+        {
+
+            createMilestone();
 
         }
 
