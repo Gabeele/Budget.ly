@@ -74,9 +74,17 @@ namespace Budget.ly
         public string Stringify()
         {
 
-            return string.Format("{0} {1} {2}", this.description.ToString(), this.date.ToString(), this.targetAmount.ToString());
+            return string.Format("{0} {1} {2}", this.description.ToString(), convertDate(), this.targetAmount.ToString());
 
         }
 
+        protected string convertDate()
+        {
+            string date_str;
+
+            date_str = this.date.Day.ToString() + "/" + this.date.Month.ToString() + "/" + this.date.Year.ToString();
+
+            return date_str;
+        }
     }
 }

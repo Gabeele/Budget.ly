@@ -30,7 +30,7 @@ namespace Budget.ly
             this.firstName = acc.GetFirstName();
             this.lastName = acc.GetLastName();
 
-            FileIO.write(acc);
+            FileIO.write(acc);  //TODO for some reason it is not calling
 
         }
                

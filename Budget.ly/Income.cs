@@ -18,7 +18,7 @@ namespace Budget.ly
 
         public void SetBillInterval(int billInterval)
         {
-            if (billInterval <= 0)
+            if (billInterval >= 0)
                 this.billInterval = billInterval;
             else
                 this.billInterval = 0;
@@ -32,7 +32,7 @@ namespace Budget.ly
         public override string Stringify()
         {
 
-            return string.Format("{0} {1} {2} {3} {4}", this.amount.ToString(), this.date.ToString(), this.itemType.ToString(), this.label.ToString(), this.billInterval.ToString());
+            return string.Format("{0} {1} {2} {3} {4}", this.amount.ToString(), convertDate(), this.itemType.ToString(), this.label.ToString(), this.billInterval.ToString());
 
         }
 

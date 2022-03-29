@@ -34,9 +34,19 @@ namespace Budget.ly
         public override string Stringify()
         {
 
-            return string.Format("{0} {1} {2} {3}", this.amount.ToString(), this.date.ToString(), this.itemType.ToString(), this.label.ToString());
+            return string.Format("{0} {1} {2} {3}", this.amount.ToString(), convertDate() , this.itemType.ToString(), this.label.ToString());
 
         }
+
+        protected string convertDate()
+        {
+            string date_str;
+
+            date_str = this.date.Day.ToString() + "/" + this.date.Month.ToString() + "/" + this.date.Year.ToString();
+
+            return date_str;
+        }
+
 
     }
 

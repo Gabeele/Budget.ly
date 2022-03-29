@@ -51,12 +51,8 @@ namespace Budget.ly
 
                     newAcc = new (words[0], words[1], float.Parse(words[2]));
 
-                    string[] date_str = words[4].Split('-');
-                    
-                    //constructed with Y/M/D
-                    DateTime date = new(int.Parse(date_str[0]), int.Parse(date_str[1]), int.Parse(date_str[2]));
 
-                    Goal goal = new(words[3], float.Parse(words[7]), date);
+                    Goal goal = new(words[3], float.Parse(words[5]), DateFromString(words[4]));
 
                     newAcc.SetGoal(goal);
 
@@ -65,34 +61,33 @@ namespace Budget.ly
                 {
 
                     string[] item = allLines[i].Split(" ");
-                    string itemType = item[4];
+                    string itemType = item[2];
 
-                    string[] tempDateStr = item[1].Split('-');
-                    DateTime tempDate = new(int.Parse(tempDateStr[0]), int.Parse(tempDateStr[1]), int.Parse(tempDateStr[2]));
+                    DateTime tempDate = DateFromString(item[1]);
 
                     if (itemType == "Expense")
                     {
 
-                        Expense tempExpense = new(float.Parse(item[0]), item[5], tempDate);
+                        Expense tempExpense = new(float.Parse(item[0]), item[3], tempDate);
                         newAcc.GetFinances().add(tempExpense);
 
                     }
                     if (itemType == "Gain")
                     {
 
-                        Expense tempGain = new(float.Parse(item[0]), item[5], tempDate);
+                        Expense tempGain = new(float.Parse(item[0]), item[3], tempDate);
                         newAcc.GetFinances().add(tempGain);
                     }
                     if (itemType == "Income")
                     {
 
-                        Income tempIncome = new(float.Parse(item[0]), item[5], tempDate, int.Parse(item[6]));
+                        Income tempIncome = new(float.Parse(item[0]), item[3], tempDate, int.Parse(item[4]));
                         newAcc.GetFinances().add(tempIncome);
                     }
                     if (itemType == "Bill")
                     {
 
-                        Bill tempBill = new(float.Parse(item[0]), item[5], tempDate, int.Parse(item[6]));
+                        Bill tempBill = new(float.Parse(item[0]), item[3], tempDate, int.Parse(item[4]));
                         newAcc.GetFinances().add(tempBill);
                     }
 
@@ -108,5 +103,28 @@ namespace Budget.ly
 
             return newAcc;
         }
+        public static string StringFromDate(DateTime date)
+        {
+            string date_str;
+
+            date_str = date.Day.ToString() + "/" + date.Month.ToString() + "/" + date.Year.ToString();
+
+            return date_str;
+        }
+
+        public static DateTime DateFromString(string date_str)
+        {
+            DateTime date;
+
+            string[] elements = date_str.Split('/');
+
+            date = new(int.Parse(elements[2]), int.Parse(elements[1]), int.Parse(elements[0]));
+
+            return date;
+        }
+
+
     }
+
+
 }
