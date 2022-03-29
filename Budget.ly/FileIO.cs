@@ -75,7 +75,7 @@ namespace Budget.ly
                     if (itemType == "Gain")
                     {
 
-                        Expense tempGain = new(float.Parse(item[0]), item[3], tempDate);
+                        Gain tempGain = new(float.Parse(item[0]), item[3], tempDate);
                         newAcc.GetFinances().add(tempGain);
                     }
                     if (itemType == "Income")

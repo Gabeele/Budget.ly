@@ -50,8 +50,9 @@ namespace Budget.ly
                 Console.WriteLine("Budget.ly - Budget Goal Software\n\n");
                 if (this.account.GetGoal() != null)
                 {
-                    Console.WriteLine("Goal: {0}\n", GoalStatus());
-                    Console.WriteLine("Balance: ${0} Goal Target: ${1}\n", account.GetBalance(), account.GetGoal().GetTargetAmount());
+                    Console.WriteLine("Balance: ${0}\nGoal Target: ${1}\n", account.GetBalance(), account.GetGoal().GetTargetAmount());
+                    Console.WriteLine("Goal: {0}", GoalStatus());
+                    Console.WriteLine("You will reach your goal in {0} days\n", MoneyTracker.CalculateDaysToReachGoal(this.account));
                 }
                 else if (this.account.GetGoal() == null)
                 {
@@ -62,6 +63,7 @@ namespace Budget.ly
                 }
                 
                 Console.WriteLine("Avg Bill: ${0}\nAvg Income: ${1}\nAvg Expense: ${2}\nAvg Gain: ${3}\n", averageBill(), averageIncome(), averageExpense(), averageGain());
+                Console.WriteLine("Total Bill: ${0}\nTotal Income: ${1}\nTotal Expense: ${2}\nTotal Gain: ${3}\n", totalBill(), totalIncome(), totalExpense(), totalGain());
                 Console.WriteLine("\t1] Add Expense\n\t2] Add Gain\n\t3] Add Income\n\t4] Add Bill\n\t5] Set a goal\n\t0] Exit\n\t");
 
                 isRunning = optionSelect();
@@ -224,13 +226,13 @@ namespace Budget.ly
         private DateTime getDate()
         {
            
-            Console.Write("Enter a month (1-12): ");
+            Console.Write("Enter the month of receipt/payment (1-12): ");
             int month = int.Parse(Console.ReadLine());
 
-            Console.Write("Enter a day: ");
+            Console.Write("Enter the day of receipt/payment (1-31): ");
             int day = int.Parse(Console.ReadLine());
 
-            Console.Write("Enter a year: ");
+            Console.Write("Enter the year of receipt/payment: ");
             int year = int.Parse(Console.ReadLine());
 
             DateTime date = new DateTime(year, month, day);
@@ -290,6 +292,27 @@ namespace Budget.ly
         private float averageBill()
         {
             return MoneyTracker.AverageBill(this.account);
+        }
+
+        private float totalExpense()
+        {
+            return MoneyTracker.TotalExpense(this.account);
+
+        }
+
+        private float totalGain()
+        {
+            return MoneyTracker.TotalGain(this.account);
+        }
+
+        private float totalIncome()
+        {
+            return MoneyTracker.TotalIncome(this.account);
+        }
+
+        private float totalBill()
+        {
+            return MoneyTracker.TotalBill(this.account);
         }
 
         private void terminate()

@@ -9,25 +9,60 @@ namespace Budget.ly
     static public class MoneyTracker
     {
 
-        //static public int CalculateDaysToReachGoal(Account account)
-        //{
-        //    int daysToReachGoal;
+        static public int CalculateDaysToReachGoal(Account account)
+        {
 
-        //    //Calculates the amount of 'intervals' it will take for the account to reach its goal, based on income and expense items of the account.
-        //    float tempGoalAmount = account.GetGoal().GetTargetAmount();
+            if (account.GetBalance() > account.GetGoal().GetTargetAmount())
+            {
 
-        //    float reoccuringCashFlow = (TotalIncome(account) - TotalBill(account));
-        //    float oneTimeCashFlow = (TotalGain(account) - TotalExpense(account));
+                //Already have enough in the account.
+                return 0;
 
+            }
 
+            //If the goal is attainable, how many days will it take to get there based on current balance and projected cash flows.
+            if (IsGoalAttainable(account))
+            {
 
-        //    return daysToReachGoal;    //TODO return the date
-        //}
+                DateTime tempGoalDate = account.GetGoal().GetDate();
+                DateTime currDate = DateTime.Now;
+                TimeSpan diff = tempGoalDate.Subtract(currDate);
+                int timeSpan = diff.Days;
+
+                float reoccuringCashFlowInRange = (TotalIncomeInGoalRange(account) - TotalBillInGoalRange(account));
+                float oneTimeCashFlowInRange = (TotalGainInGoalRange(account) - TotalExpenseInGoalRange(account));
+
+                float cashflowsPerDay = (reoccuringCashFlowInRange + oneTimeCashFlowInRange) / timeSpan;
+
+                float tempBalance = account.GetBalance();
+                int dayCounter = 0;
+
+                while (tempBalance < account.GetGoal().GetTargetAmount())
+                {
+
+                    tempBalance += cashflowsPerDay;
+                    dayCounter++;
+
+                }
+
+                return dayCounter;
+
+            }
+
+            else
+            {
+
+                return -1;
+
+            }
+
+        }
 
         static public bool IsGoalAttainable(Account account)
         {
            
             float currBalance = account.GetBalance();
+
             float reoccuringCashFlowInRange = (TotalIncomeInGoalRange(account) - TotalBillInGoalRange(account));
             float oneTimeCashFlowInRange = (TotalGainInGoalRange(account) - TotalExpenseInGoalRange(account));
 
@@ -188,12 +223,14 @@ namespace Budget.ly
 
             float sumOfBills = 0;
 
-            Items tempFinances = account.GetFinances();
 
-            while (tempFinances.Iterator().HasNext())
+            Items tempFinances = account.GetFinances();
+            IIterator tempIterator = tempFinances.Iterator();
+
+            while (tempIterator.HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.Iterator().Next();
+                Item tempItem = (Item)tempIterator.Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Bill)
                 {
@@ -259,18 +296,18 @@ namespace Budget.ly
 
         }
 
-
         static public float TotalExpense(Account account)
         {
 
             float sumOfExpenses = 0;
 
             Items tempFinances = account.GetFinances();
+            IIterator tempIterator = tempFinances.Iterator();
 
-            while (tempFinances.Iterator().HasNext())
+            while (tempIterator.HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.Iterator().Next();
+                Item tempItem = (Item)tempIterator.Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Expense)
                 {
@@ -343,11 +380,12 @@ namespace Budget.ly
             float sumOfIncome = 0;
 
             Items tempFinances = account.GetFinances();
+            IIterator tempIterator = tempFinances.Iterator();
 
-            while (tempFinances.Iterator().HasNext())
+            while (tempIterator.HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.Iterator().Next();
+                Item tempItem = (Item)tempIterator.Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Income)
                 {
@@ -357,6 +395,7 @@ namespace Budget.ly
                 }
 
             }
+
             if (sumOfIncome == 0)
             {
                 return 0;
@@ -413,19 +452,18 @@ namespace Budget.ly
 
         }
 
-
         static public float TotalGain(Account account)
         {
 
             float sumOfGain = 0;
 
             Items tempFinances = account.GetFinances();
+            IIterator tempIterator = tempFinances.Iterator();
 
-
-            while (tempFinances.Iterator().HasNext())
+            while (tempIterator.HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.Iterator().Next();
+                Item tempItem = (Item)tempIterator.Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Gain)
                 {
