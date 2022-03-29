@@ -39,6 +39,8 @@ namespace Budget.ly
 
             AccountHandler newAccountHandler = new(this.account);
 
+            Console.Clear();
+
         }
 
         public bool PrintMenu()
@@ -59,6 +61,8 @@ namespace Budget.ly
 
                     Console.WriteLine("Goal: Not set.\n");
                     Console.WriteLine("Balance: ${0} Goal Target: Not set.\n", account.GetBalance());
+
+                    Console.WriteLine("Enter a goal to receive financial advice.\n");
 
                 }
                 
