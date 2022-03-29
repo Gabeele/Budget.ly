@@ -9,7 +9,7 @@ namespace Budget.ly
 {
     public static class FileIO
     {
-        private static string name = @"\Account.txt";
+        private static string name = "Account.txt";
 
         public static void write(float balance, Goal g, List<Item> fin)
         {

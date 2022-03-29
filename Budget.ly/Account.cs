@@ -35,6 +35,7 @@ namespace Budget.ly
             this.goal = null;
             this.finances = new Items();
             this.accountHistory = new AccountHistory() { };
+            observers = new List<IObserver>();
 
         }
 
@@ -92,6 +93,7 @@ namespace Budget.ly
         }
         public void RegisterObserver(IObserver o)
         {
+            
             observers.Add(o);
         }
 
@@ -154,7 +156,7 @@ namespace Budget.ly
         public string Stringify()
         {
 
-            return string.Format("{0} {1} {2} {3}", this.firstName.ToString(), this.lastName.ToString(), this.accountBalance.ToString(), this.goal.Stringify());
+            return string.Format("{0} {1} {2} {3}", this.firstName, this.lastName, this.accountBalance.ToString(), this.goal.Stringify());
 
         }
 

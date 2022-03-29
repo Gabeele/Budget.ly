@@ -10,7 +10,7 @@ namespace Budget.ly
     {
         private int billInterval;
 
-        public Income(int amount, string label, DateTime date, int billInterval) : base(amount, label, date)
+        public Income(float amount, string label, DateTime date, int billInterval) : base(amount, label, date)
         {
             SetBillInterval(billInterval);
         }
