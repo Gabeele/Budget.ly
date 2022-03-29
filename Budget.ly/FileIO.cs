@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Budget.ly
 {
-    static public class FileIO
+    public static class FileIO
     {
         private static string name = @"\Account.txt";
 
@@ -27,6 +27,26 @@ namespace Budget.ly
 
         public static void write(Account acc)
         {
+            TextWriter writer = new StreamWriter(name);
+
+            if (!File.Exists(name))
+            {
+                File.Create(name);
+            }
+
+            writer.WriteLine(acc.Stringify());
+
+            while (acc.GetFinances().Iterator().HasNext())
+            {
+
+               Item tempItem = (Item)acc.GetFinances().Iterator().Next();
+
+               writer.WriteLine(tempItem.Stringify());
+
+            }
+
+            writer.Flush();
+            writer.Close();
 
         }
 
@@ -34,17 +54,24 @@ namespace Budget.ly
         {
             Account newAcc = new();
 
-            string[] allLines = File.ReadAllLines(name);
-
-            foreach (string line in allLines)
+            if (File.Exists(name))
             {
 
-                string[] words = line.Split(',');
+                string[] allLines = File.ReadAllLines(name);
 
-                //TODO: Change how the words are processed
-                //newAcc.setBalance(words[0]);
-                //newAcc.setGoal(words[1]);
-                //newAcc.setFinance(words[2]);
+                foreach (string line in allLines)
+                {
+
+                    string[] words = line.Split(" ");
+
+                    newAcc = new (words[0], words[1], float.Parse(words[2]));
+                }
+
+            }
+
+            else
+            {
+                newAcc = null;
             }
 
             return newAcc;

@@ -9,18 +9,20 @@ namespace Budget.ly
     static public class MoneyTracker
     {
 
-        static public DateTime Calculate(Account account)
-        {
-            DateTime tempTime;
+        //static public int CalculateDaysToReachGoal(Account account)
+        //{
+        //    int daysToReachGoal;
             
-            //Calculates the amount of 'intervals' it will take for the account to reach its goal, based on income and expense items of the account.
-            float tempGoalAmount = account.GetGoal().GetTargetAmount();
+        //    //Calculates the amount of 'intervals' it will take for the account to reach its goal, based on income and expense items of the account.
+        //    float tempGoalAmount = account.GetGoal().GetTargetAmount();
 
-            float reoccuringCashFlow = (TotalIncome(account) - TotalBill(account));
-            float oneTimeCashFlow = (TotalGain(account) - TotalExpense(account));
+        //    float reoccuringCashFlow = (TotalIncome(account) - TotalBill(account));
+        //    float oneTimeCashFlow = (TotalGain(account) - TotalExpense(account));
 
-            return tempTime;    //TODO return the date
-        }
+
+
+        //    return daysToReachGoal;    //TODO return the date
+        //}
 
         static public float AverageItem(Account account)
         {

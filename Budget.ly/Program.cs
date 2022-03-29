@@ -7,8 +7,23 @@ namespace Budget.ly
     {
         static void Main(string[] args)
         {
-            UI ui = new();
+  
+            Account account = FileIO.ReadFromFile();
+            if (account != null)
+            {
 
+                UI newUI = new(account);
+                newUI.PrintMenu();
+
+            }
+            else
+            {
+
+                UI newUI = new();
+                newUI.createAccount();
+                newUI.PrintMenu();
+
+            }
 
         }
     }

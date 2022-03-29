@@ -27,5 +27,14 @@ namespace Budget.ly
         {
             return billInterval;
         }
+
+        public override string Stringify()
+        {
+
+            return string.Format("{0} {1} {2} {3} {4}", this.amount.ToString(), this.date.ToString(), this.itemType.ToString(), this.label.ToString(), this.billInterval.ToString());
+
+        }
+
     }
+
 }

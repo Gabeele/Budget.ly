@@ -24,25 +24,19 @@ namespace Budget.ly
 
         public void createAccount()
         {
-            Console.WriteLine("Enter in First Name: ");
-            String firstName = Console.ReadLine();
-            Console.WriteLine("Enter in Last Name: ");
-            String lastName = Console.ReadLine();
 
-            float balance = getAmount();
-             
+            Console.WriteLine("We've detected a first-time user. Please enter some basic information");
 
-            this.account = new Account(firstName, lastName, balance);
-        }
+            Console.WriteLine("Enter in first name: ");
+            string firstName = Console.ReadLine();
+            Console.WriteLine("Enter in last name: ");
+            string lastName = Console.ReadLine();
+            Console.WriteLine("Enter in your account balance: ");
+            float acctBalance = float.Parse(Console.ReadLine());
 
-        public void getAccount()
-        {
-
-
+            this.account = new Account(firstName, lastName, acctBalance);
 
         }
-
-
 
         public bool PrintMenu()
         {
@@ -51,9 +45,9 @@ namespace Budget.ly
             do
             {
                 Console.WriteLine("Budget.ly - Budget Goal Software\n\n");
-                Console.WriteLine("Balance: %d Goal: %d\n", account.GetBalance(), account.GetGoal());
-                Console.WriteLine("Avg Expense: %d Avg Gain: %d On target: %d\n", ExpenseAverage(), GainAverage(), GoalStatus());
-                Console.WriteLine("\t1] Add expense\n\t2] Add Gain\n\t3] View reoccuring bills\n\t4] View reoccuring income\n0] Exit\n\t");
+                Console.WriteLine("Balance: {0} Goal: {1}\n", account.GetBalance(), account.GetGoal());
+                Console.WriteLine("Avg Expense: {0} Avg Gain: {1} On target: {2}\n", ExpenseAverage(), GainAverage(), GoalStatus());
+                Console.WriteLine("\t1] Add expense\n\t2] Add Gain\n\t3] View reoccuring bills\n\t4] View reoccuring income\n\t5] Set a goal\n\t0] Exit\n\t");
 
                 isRunning = optionSelect();
 
@@ -100,19 +94,19 @@ namespace Budget.ly
                     case 2:
                         addGainz(getAmount(), getLabel(), getDate());
                         break;
-                    case 3:
-                        addRecurringGainz(getAmount(), getLabel(), getDate());
-                        break;
-                    case 4:
-                        addRecurringGainz(getAmount(), getLabel(), getDate());
-                        break;
-                    case 3:
+                    //case 3:
+                    //    addRecurringGainz(getAmount(), getLabel(), getDate());
+                    //    break;
+                    //case 4:
+                    //    addRecurringGainz(getAmount(), getLabel(), getDate());
+                    //    break;
+                    case 5:
                         viewRecurringBill();
                         break;
-                    case 4:
+                    case 6:
                         viewRecurringIncome();
                         break;
-                    case 5:
+                    case 0:
                         terminate();
                         return false;
                     default:
@@ -136,13 +130,14 @@ namespace Budget.ly
         {
 
             Expense exp = new Expense(amount, label , date);
-            account.addItem(exp);
+            account.GetFinances().add(exp);
         }
 
         private void addGainz(float amount, string label, DateTime date)
         {
             Gain gain = new Gain(amount, label, date);
-            account.addItem(gain);
+            account.GetFinances().add(gain);
+
         }
 
         private string getLabel()

@@ -10,10 +10,11 @@ namespace Budget.ly
     public class AccountHandler : IObserver
     {
         private Account acc;
+        private string firstName;
+        private string lastName;
         private float balance;
         private Goal goal;
         private Items finances;
-
 
         public AccountHandler(Account acc)
         {
@@ -26,9 +27,13 @@ namespace Budget.ly
             this.balance = acc.GetBalance();
             this.goal = acc.GetGoal();
             this.finances = acc.GetFinances();
-            //write
-        }
+            this.firstName = acc.GetFirstName();
+            this.lastName = acc.GetLastName();
 
-       
+            FileIO.write(acc);
+
+        }
+               
     }
+
 }

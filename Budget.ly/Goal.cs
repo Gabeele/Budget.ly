@@ -78,6 +78,12 @@ namespace Budget.ly
             return this.date;
 
         }
+        public string Stringify()
+        {
+
+            return string.Format("{0} {1} {2}", this.description.ToString(), this.date.ToString(), this.targetAmount.ToString());
+
+        }
 
     }
 }

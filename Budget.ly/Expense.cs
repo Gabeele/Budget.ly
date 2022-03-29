@@ -23,5 +23,13 @@ namespace Budget.ly
                 this.amount = 0;
         }
 
+        public override string Stringify()
+        {
+
+            return string.Format("{0} {1} {2} {3}", this.amount.ToString(), this.date.ToString(), this.itemType.ToString(), this.label.ToString());
+
+        }
+
     }
+
 }

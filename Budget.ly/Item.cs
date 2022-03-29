@@ -8,7 +8,7 @@ namespace Budget.ly
 {
     public enum ITEM_TYPE { Expense, Bill, Income, Gain, None };
 
-    public class Item
+    abstract public class Item
     {
         protected float amount;
         protected string label;
@@ -57,5 +57,7 @@ namespace Budget.ly
         {
             return this.itemType;
         }
+        abstract public string Stringify();
+
     }
 }

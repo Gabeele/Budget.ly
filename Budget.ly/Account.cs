@@ -54,6 +54,18 @@ namespace Budget.ly
 
         }
 
+        public void SetFirstName(string firstName)
+        {
+            this.firstName = firstName;
+            NotfiyObservers();
+        }
+
+        public void SetLastName(string lastName)
+        {
+            this.lastName = lastName;
+            NotfiyObservers();
+        }
+
         public void SetBalance(float balance)
         {
 
@@ -136,6 +148,13 @@ namespace Budget.ly
         {
 
             CreateMilestone();
+
+        }
+
+        public string Stringify()
+        {
+
+            return string.Format("{0} {1} {2} {3}", this.firstName.ToString(), this.lastName.ToString(), this.accountBalance.ToString(), this.goal.Stringify());
 
         }
 
