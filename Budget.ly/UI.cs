@@ -48,8 +48,8 @@ namespace Budget.ly
             do
             {
                 Console.WriteLine("Budget.ly - Budget Goal Software\n\n");
-                Console.WriteLine("Balance: {0} Goal: {1}\n", account.GetBalance(), account.GetGoal());
-                Console.WriteLine("Avg Expense: {0} Avg Gain: {1} On target: {2}\n", ExpenseAverage(), GainAverage(), GoalStatus());
+                Console.WriteLine("Balance: {0} Goal: {1}\n", account.GetBalance(), GoalStatus());
+                Console.WriteLine("Avg Expense: {0} Avg Gain: {1} Target: {2}\n", ExpenseAverage(), GainAverage(), account.GetGoal(). ;
                 Console.WriteLine("\t1] Add Expense\n\t2] Add Gain\n\t3] Add Income\n\t4] Add Bill\n\t5] Set a goal\n\t0] Exit\n\t");
 
                 isRunning = optionSelect();
@@ -127,8 +127,16 @@ namespace Budget.ly
 
         private string GoalStatus()
         {
-            //Determine the goal status 
-            return null;
+            if (MoneyTracker.IsGoalAttainable(this.account))
+            {
+                return "On track!";
+
+            }
+            else
+            {
+                return "Uh oh! Bank account is crying :'(";
+            }
+
         }
 
         private void createAGoal(string description, float targetAmount, DateTime date)

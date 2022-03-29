@@ -51,13 +51,6 @@ namespace Budget.ly
 
         }
 
-        public void SetTargetAmount(int targetAmount)
-        {
-
-            this.targetAmount = (float)targetAmount;
-
-        }
-
         public float GetTargetAmount()
         {
 

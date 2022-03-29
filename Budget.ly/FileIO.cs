@@ -11,20 +11,6 @@ namespace Budget.ly
     {
         private static string name = "Account.txt";
 
-        public static void write(float balance, Goal g, List<Item> fin)
-        {
-            TextWriter writer = new StreamWriter(name);
-
-            if (!File.Exists(name))
-            {
-                File.Create(name);
-            }
-
-            writer.WriteLine(balance + ", " + g + ", " + fin);
-            writer.Flush();
-            writer.Close();
-        }
-
         public static void write(Account acc)
         {
             TextWriter writer = new StreamWriter(name);
@@ -58,13 +44,26 @@ namespace Budget.ly
             {
 
                 string[] allLines = File.ReadAllLines(name);
-
-                foreach (string line in allLines)
-                {
+                string line = allLines[0];
 
                     string[] words = line.Split(" ");
 
+
                     newAcc = new (words[0], words[1], float.Parse(words[2]));
+
+                    string[] date_str = words[4].Split('/');
+
+                    DateTime date = new(int.Parse(date_str[2]), int.Parse(date_str[1]), int.Parse(date_str[0]));
+
+                    Goal goal = new(words[3], float.Parse(words[7]), date);
+
+                    newAcc.SetGoal(goal);
+
+
+                    //Read in all items
+                   foreach (string meh in allLines){
+                        //Start reding after 1
+                
                 }
 
             }
