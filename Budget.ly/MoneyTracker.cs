@@ -80,6 +80,11 @@ namespace Budget.ly
 
             }
 
+            if(numBills == 0)
+            {
+                return 0;
+            }
+
             return (sumOfBills / numBills);
 
         }
@@ -105,6 +110,11 @@ namespace Budget.ly
 
                 }
 
+            }
+
+            if (numExpenses == 0)
+            {
+                return 0;
             }
 
             return (sumOfExpenses / numExpenses);
@@ -134,6 +144,11 @@ namespace Budget.ly
 
             }
 
+            if (numIncome == 0)
+            {
+                return 0;
+            }
+
             return (sumOfIncome / numIncome);
 
         }
@@ -161,6 +176,11 @@ namespace Budget.ly
 
             }
 
+            if (numGain == 0)
+            {
+                return 0;
+            }
+
             return (sumOfGain / numGain);
 
         }
@@ -184,6 +204,11 @@ namespace Budget.ly
 
                 }
 
+            }
+
+            if (sumOfBills == 0)
+            {
+                return 0;
             }
 
             return sumOfBills;
@@ -211,6 +236,11 @@ namespace Budget.ly
 
             }
 
+            if (sumOfExpenses == 0)
+            {
+                return 0;
+            }
+
             return sumOfExpenses;
 
         }
@@ -234,6 +264,10 @@ namespace Budget.ly
 
                 }
 
+            }
+            if (sumOfIncome == 0)
+            {
+                return 0;
             }
 
             return sumOfIncome;
@@ -260,6 +294,11 @@ namespace Budget.ly
 
                 }
 
+            }
+
+            if (sumOfGain == 0)
+            {
+                return 0;
             }
 
             return sumOfGain;

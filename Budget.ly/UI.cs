@@ -48,8 +48,9 @@ namespace Budget.ly
             do
             {
                 Console.WriteLine("Budget.ly - Budget Goal Software\n\n");
-                Console.WriteLine("Balance: {0} Goal: {1}\n", account.GetBalance(), GoalStatus());
-                Console.WriteLine("Avg Expense: {0} Avg Gain: {1} Target: {2}\n", ExpenseAverage(), GainAverage(), account.GetGoal(). ;
+                Console.WriteLine("Goal: {0}\n", GoalStatus());
+                Console.WriteLine("Balance: ${0} Target: ${1}\n", account.GetBalance(), account.GetGoal().GetTargetAmount());
+                Console.WriteLine("Avg Bill: ${0} Avg Income: ${1} Avg Expense: ${2} Avg Gain: ${3} \n", averageBill(), averageIncome(), averageExpense(), averageGain());
                 Console.WriteLine("\t1] Add Expense\n\t2] Add Gain\n\t3] Add Income\n\t4] Add Bill\n\t5] Set a goal\n\t0] Exit\n\t");
 
                 isRunning = optionSelect();
@@ -58,7 +59,7 @@ namespace Budget.ly
 
             return false;
         }
-
+         
         private int getOption()
         {
             bool isNumber = false;
@@ -258,15 +259,25 @@ namespace Budget.ly
 
         }
 
-        private int ExpenseAverage()
+        private float averageExpense()
         {
-
-            return 1;
+            return  MoneyTracker.AverageExpense(this.account);
+            
         }
 
-        private int GainAverage()
+        private float averageGain()
         {
-            return 1;
+            return MoneyTracker.AverageBill(this.account);
+        }
+
+        private float averageIncome()
+        {
+            return MoneyTracker.AverageIncome(this.account);
+        }
+
+        private float averageBill()
+        {
+            return MoneyTracker.AverageBill(this.account);
         }
 
         private void terminate()
