@@ -21,11 +21,11 @@ namespace Budget.ly
             }
 
             writer.WriteLine(acc.Stringify());
-
-            while (acc.GetFinances().Iterator().HasNext())
+            IIterator tempIterator = acc.GetFinances().Iterator();
+            while (tempIterator.HasNext())
             {
 
-               Item tempItem = (Item)acc.GetFinances().Iterator().Next();
+               Item tempItem = (Item)tempIterator.Next();
 
                writer.WriteLine(tempItem.Stringify());
 
@@ -60,12 +60,44 @@ namespace Budget.ly
 
                     newAcc.SetGoal(goal);
 
+                    
+                for (int i = 1; i < allLines.Length; i++)
+                {
 
-                    //Read in all items
-                   foreach (string str in allLines){
-                        //Start reding after 1
-                
+                    string[] item = allLines[i].Split(" ");
+                    string itemType = item[4];
+
+                    string[] tempDateStr = item[1].Split('-');
+                    DateTime tempDate = new(int.Parse(tempDateStr[0]), int.Parse(tempDateStr[1]), int.Parse(tempDateStr[2]));
+
+                    if (itemType == "Expense")
+                    {
+
+                        Expense tempExpense = new(float.Parse(item[0]), item[5], tempDate);
+                        newAcc.GetFinances().add(tempExpense);
+
                     }
+                    if (itemType == "Gain")
+                    {
+
+                        Expense tempGain = new(float.Parse(item[0]), item[5], tempDate);
+                        newAcc.GetFinances().add(tempGain);
+                    }
+                    if (itemType == "Income")
+                    {
+
+                        Income tempIncome = new(float.Parse(item[0]), item[5], tempDate, int.Parse(item[6]));
+                        newAcc.GetFinances().add(tempIncome);
+                    }
+                    if (itemType == "Bill")
+                    {
+
+                        Bill tempBill = new(float.Parse(item[0]), item[5], tempDate, int.Parse(item[6]));
+                        newAcc.GetFinances().add(tempBill);
+                    }
+
+                }
+                  
 
             }
 

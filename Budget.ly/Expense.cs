@@ -13,6 +13,7 @@ namespace Budget.ly
         public Expense(float amount, string label, DateTime date) : base(amount, label)
         {
             this.date = date;
+            this.SetItemType(ITEM_TYPE.Expense);
         }
 
         public void SetAmount(int amount)

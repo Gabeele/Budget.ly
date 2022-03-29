@@ -51,17 +51,17 @@ namespace Budget.ly
                 if (this.account.GetGoal() != null)
                 {
                     Console.WriteLine("Goal: {0}\n", GoalStatus());
-                    Console.WriteLine("Balance: ${0} Target: ${1}\n", account.GetBalance(), account.GetGoal().GetTargetAmount());
+                    Console.WriteLine("Balance: ${0} Goal Target: ${1}\n", account.GetBalance(), account.GetGoal().GetTargetAmount());
                 }
                 else if (this.account.GetGoal() == null)
                 {
 
                     Console.WriteLine("Goal: Not set.\n");
-                    Console.WriteLine("Balance: ${0} Target: Not set.\n", account.GetBalance());
+                    Console.WriteLine("Balance: ${0} Goal Target: Not set.\n", account.GetBalance());
 
                 }
                 
-                Console.WriteLine("Avg Bill: ${0} Avg Income: ${1} Avg Expense: ${2} Avg Gain: ${3} \n", averageBill(), averageIncome(), averageExpense(), averageGain());
+                Console.WriteLine("Avg Bill: ${0}\nAvg Income: ${1}\nAvg Expense: ${2}\nAvg Gain: ${3}\n", averageBill(), averageIncome(), averageExpense(), averageGain());
                 Console.WriteLine("\t1] Add Expense\n\t2] Add Gain\n\t3] Add Income\n\t4] Add Bill\n\t5] Set a goal\n\t0] Exit\n\t");
 
                 isRunning = optionSelect();
@@ -78,6 +78,7 @@ namespace Budget.ly
 
             do
             {
+                Console.WriteLine("Enter in Option: ");
                 string input = Console.In.ReadLine();
                 if (input.All(Char.IsDigit))
                 {
@@ -278,7 +279,7 @@ namespace Budget.ly
 
         private float averageGain()
         {
-            return MoneyTracker.AverageBill(this.account);
+            return MoneyTracker.AverageGain(this.account);
         }
 
         private float averageIncome()

@@ -32,7 +32,8 @@ namespace Budget.ly
             float oneTimeCashFlowInRange = (TotalGainInGoalRange(account) - TotalExpenseInGoalRange(account));
 
             //Needs to compare against goal target amount
-            if (currBalance + reoccuringCashFlowInRange + oneTimeCashFlowInRange > 0)
+            if ((currBalance + reoccuringCashFlowInRange + oneTimeCashFlowInRange) > account.GetGoal().GetTargetAmount())
+                
             {
                 return true;
 
@@ -61,11 +62,11 @@ namespace Budget.ly
             int numBills = 0;
 
             Items tempFinances = account.GetFinances();
-
-            while (tempFinances.Iterator().HasNext())
+            IIterator tempIterator = tempFinances.Iterator();
+            while (tempIterator.HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.Iterator().Next();
+                Item tempItem = (Item)tempIterator.Next();
        
                 if (tempItem.GetItemType() == ITEM_TYPE.Bill)
                 {
@@ -93,11 +94,11 @@ namespace Budget.ly
             int numExpenses = 0;
 
             Items tempFinances = account.GetFinances();
-
-            while (tempFinances.Iterator().HasNext())
+            IIterator tempIterator = tempFinances.Iterator();
+            while (tempIterator.HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.Iterator().Next();
+                Item tempItem = (Item)tempIterator.Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Expense)
                 {
@@ -125,11 +126,11 @@ namespace Budget.ly
             int numIncome = 0;
 
             Items tempFinances = account.GetFinances();
-
-            while (tempFinances.Iterator().HasNext())
+            IIterator tempIterator = tempFinances.Iterator();
+            while (tempIterator.HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.Iterator().Next();
+                Item tempItem = (Item)tempIterator.Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Income)
                 {
@@ -157,11 +158,11 @@ namespace Budget.ly
             int numGain = 0;
 
             Items tempFinances = account.GetFinances();
-
-            while (tempFinances.Iterator().HasNext())
+            IIterator tempIterator = tempFinances.Iterator();
+            while (tempIterator.HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.Iterator().Next();
+                Item tempItem = (Item)tempIterator.Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Gain)
                 {
@@ -217,16 +218,15 @@ namespace Budget.ly
 
             DateTime goalDate = account.GetGoal().GetDate();
             DateTime currDate = DateTime.Now;
-            int dayRange = (goalDate.Date - currDate.Date).Days;
-
+          
             float sumOfBills = 0;
 
             Items tempFinances = account.GetFinances();
-
-            while (tempFinances.Iterator().HasNext())
+            IIterator tempIterator = tempFinances.Iterator();
+            while (tempIterator.HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.Iterator().Next();
+                Item tempItem = (Item)tempIterator.Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Bill)
                 {
@@ -238,6 +238,13 @@ namespace Budget.ly
                         sumOfBills += tempBill.GetAmount();
 
                     }
+
+                }
+
+                else if (tempItem.GetItemType() == ITEM_TYPE.None)
+                {
+
+                    break;
 
                 }
 
@@ -293,22 +300,29 @@ namespace Budget.ly
             float sumOfExpenses = 0;
 
             Items tempFinances = account.GetFinances();
-
-            while (tempFinances.Iterator().HasNext())
+            IIterator tempIterator = tempFinances.Iterator();
+            while (tempIterator.HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.Iterator().Next();
+                Item tempItem = (Item)tempIterator.Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Expense)
                 {
-                    Expense tempExp = (Expense)tempItem;
+                    Expense tempExpense = (Expense)tempItem;
 
-                    if (tempExp.GetDate() < goalDate)
+                    if (tempExpense.GetDate() < goalDate)
                     {
 
-                        sumOfExpenses += tempExp.GetAmount();
+                        sumOfExpenses += tempExpense.GetAmount();
 
                     }
+
+                }
+
+                else if (tempItem.GetItemType() == ITEM_TYPE.None)
+                {
+
+                    break;
 
                 }
 
@@ -362,11 +376,11 @@ namespace Budget.ly
             float sumOfIncome = 0;
 
             Items tempFinances = account.GetFinances();
-
-            while (tempFinances.Iterator().HasNext())
+            IIterator tempIterator = tempFinances.Iterator();
+            while (tempIterator.HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.Iterator().Next();
+                Item tempItem = (Item)tempIterator.Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Income)
                 {
@@ -378,6 +392,13 @@ namespace Budget.ly
                         sumOfIncome += tempIncome.GetAmount();
 
                     }
+
+                }
+
+                else if (tempItem.GetItemType() == ITEM_TYPE.None)
+                {
+
+                    break;
 
                 }
 
@@ -434,12 +455,11 @@ namespace Budget.ly
             float sumOfGain = 0;
 
             Items tempFinances = account.GetFinances();
-
-
-            while (tempFinances.Iterator().HasNext())
+            IIterator tempIterator = tempFinances.Iterator();
+            while (tempIterator.HasNext())
             {
 
-                Item tempItem = (Item)tempFinances.Iterator().Next();
+                Item tempItem = (Item)tempIterator.Next();
 
                 if (tempItem.GetItemType() == ITEM_TYPE.Gain)
                 {
@@ -451,6 +471,13 @@ namespace Budget.ly
                         sumOfGain += tempGain.GetAmount();
 
                     }
+
+                }
+
+                else if (tempItem.GetItemType() == ITEM_TYPE.None)
+                {
+
+                    break;
 
                 }
 

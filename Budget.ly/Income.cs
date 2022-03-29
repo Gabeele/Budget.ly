@@ -13,6 +13,7 @@ namespace Budget.ly
         public Income(float amount, string label, DateTime date, int billInterval) : base(amount, label, date)
         {
             SetBillInterval(billInterval);
+            this.SetItemType(ITEM_TYPE.Income);
         }
 
         public void SetBillInterval(int billInterval)
