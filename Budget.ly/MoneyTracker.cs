@@ -12,7 +12,7 @@ namespace Budget.ly
         //static public int CalculateDaysToReachGoal(Account account)
         //{
         //    int daysToReachGoal;
-            
+
         //    //Calculates the amount of 'intervals' it will take for the account to reach its goal, based on income and expense items of the account.
         //    float tempGoalAmount = account.GetGoal().GetTargetAmount();
 
@@ -23,6 +23,32 @@ namespace Budget.ly
 
         //    return daysToReachGoal;    //TODO return the date
         //}
+
+        static public bool IsGoalAttainable(Account account)
+        {
+
+            DateTime goalDate = account.GetGoal().GetDate();
+            DateTime currDate = new DateTime();
+
+            //Filter for cashflows only within the date-range (between now and 'date').
+
+            float reoccuringCashFlow = (TotalIncome(account) - TotalBill(account));
+            float oneTimeCashFlow = (TotalGain(account) - TotalExpense(account));
+
+            if (reoccuringCashFlow + oneTimeCashFlow > 0)
+            {
+                return true;
+
+            }
+
+            else
+            {
+
+                return false;
+
+            }
+
+        }
 
         static public float AverageItem(Account account)
         {
