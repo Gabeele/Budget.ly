@@ -51,9 +51,10 @@ namespace Budget.ly
 
                     newAcc = new (words[0], words[1], float.Parse(words[2]));
 
-                    string[] date_str = words[4].Split('/');
-
-                    DateTime date = new(int.Parse(date_str[2]), int.Parse(date_str[1]), int.Parse(date_str[0]));
+                    string[] date_str = words[4].Split('-');
+                    
+                    //constructed with Y/M/D
+                    DateTime date = new(int.Parse(date_str[0]), int.Parse(date_str[1]), int.Parse(date_str[2]));
 
                     Goal goal = new(words[3], float.Parse(words[7]), date);
 
@@ -61,10 +62,10 @@ namespace Budget.ly
 
 
                     //Read in all items
-                   foreach (string meh in allLines){
+                   foreach (string str in allLines){
                         //Start reding after 1
                 
-                }
+                    }
 
             }
 

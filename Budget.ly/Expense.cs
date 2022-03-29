@@ -23,6 +23,13 @@ namespace Budget.ly
                 this.amount = 0;
         }
 
+        public DateTime GetDate()
+        {
+
+            return this.date;
+
+        }
+
         public override string Stringify()
         {
 

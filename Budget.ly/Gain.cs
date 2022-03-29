@@ -15,12 +15,19 @@ namespace Budget.ly
             this.date = date;
         }
 
-        new public void SetAmount(float amount)
+        public void SetAmount(float amount)
         {
             if (amount < 0)
                 this.amount = amount;
             else
                 this.amount = 0;
+        }
+
+        public DateTime GetDate()
+        {
+
+            return this.date;
+
         }
 
         public override string Stringify()

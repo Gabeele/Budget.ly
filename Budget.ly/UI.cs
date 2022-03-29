@@ -48,8 +48,19 @@ namespace Budget.ly
             do
             {
                 Console.WriteLine("Budget.ly - Budget Goal Software\n\n");
-                Console.WriteLine("Goal: {0}\n", GoalStatus());
-                Console.WriteLine("Balance: ${0} Target: ${1}\n", account.GetBalance(), account.GetGoal().GetTargetAmount());
+                if (this.account.GetGoal() != null)
+                {
+                    Console.WriteLine("Goal: {0}\n", GoalStatus());
+                    Console.WriteLine("Balance: ${0} Target: ${1}\n", account.GetBalance(), account.GetGoal().GetTargetAmount());
+                }
+                else if (this.account.GetGoal() == null)
+                {
+
+                    Console.WriteLine("Goal: Not set.\n");
+                    Console.WriteLine("Balance: ${0} Target: Not set.\n", account.GetBalance());
+
+                }
+                
                 Console.WriteLine("Avg Bill: ${0} Avg Income: ${1} Avg Expense: ${2} Avg Gain: ${3} \n", averageBill(), averageIncome(), averageExpense(), averageGain());
                 Console.WriteLine("\t1] Add Expense\n\t2] Add Gain\n\t3] Add Income\n\t4] Add Bill\n\t5] Set a goal\n\t0] Exit\n\t");
 

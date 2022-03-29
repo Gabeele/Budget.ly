@@ -26,16 +26,13 @@ namespace Budget.ly
 
         static public bool IsGoalAttainable(Account account)
         {
+           
+            float currBalance = account.GetBalance();
+            float reoccuringCashFlowInRange = (TotalIncomeInGoalRange(account) - TotalBillInGoalRange(account));
+            float oneTimeCashFlowInRange = (TotalGainInGoalRange(account) - TotalExpenseInGoalRange(account));
 
-            DateTime goalDate = account.GetGoal().GetDate();
-            DateTime currDate = new DateTime();
-
-            //Filter for cashflows only within the date-range (between now and 'date').
-
-            float reoccuringCashFlow = (TotalIncome(account) - TotalBill(account));
-            float oneTimeCashFlow = (TotalGain(account) - TotalExpense(account));
-
-            if (reoccuringCashFlow + oneTimeCashFlow > 0)
+            //Needs to compare against goal target amount
+            if (currBalance + reoccuringCashFlowInRange + oneTimeCashFlowInRange > 0)
             {
                 return true;
 
@@ -197,7 +194,7 @@ namespace Budget.ly
 
                 Item tempItem = (Item)tempFinances.Iterator().Next();
 
-                if (tempItem.GetItemType() == ITEM_TYPE.Gain)
+                if (tempItem.GetItemType() == ITEM_TYPE.Bill)
                 {
 
                     sumOfBills += tempItem.GetAmount();
@@ -215,6 +212,47 @@ namespace Budget.ly
 
         }
 
+        static public float TotalBillInGoalRange(Account account)
+        {
+
+            DateTime goalDate = account.GetGoal().GetDate();
+            DateTime currDate = DateTime.Now;
+            int dayRange = (goalDate.Date - currDate.Date).Days;
+
+            float sumOfBills = 0;
+
+            Items tempFinances = account.GetFinances();
+
+            while (tempFinances.Iterator().HasNext())
+            {
+
+                Item tempItem = (Item)tempFinances.Iterator().Next();
+
+                if (tempItem.GetItemType() == ITEM_TYPE.Bill)
+                {
+                    Bill tempBill = (Bill)tempItem;
+
+                    if (tempBill.GetDate() < goalDate)
+                    {
+
+                        sumOfBills += tempBill.GetAmount();
+
+                    }
+
+                }
+
+            }
+
+            if (sumOfBills == 0)
+            {
+                return 0;
+            }
+
+            return sumOfBills;
+
+        }
+
+
         static public float TotalExpense(Account account)
         {
 
@@ -231,6 +269,46 @@ namespace Budget.ly
                 {
 
                     sumOfExpenses += tempItem.GetAmount();
+
+                }
+
+            }
+
+            if (sumOfExpenses == 0)
+            {
+                return 0;
+            }
+
+            return sumOfExpenses;
+
+        }
+
+        static public float TotalExpenseInGoalRange(Account account)
+        {
+
+            DateTime goalDate = account.GetGoal().GetDate();
+            DateTime currDate = DateTime.Now;
+            int dayRange = (goalDate.Date - currDate.Date).Days;
+
+            float sumOfExpenses = 0;
+
+            Items tempFinances = account.GetFinances();
+
+            while (tempFinances.Iterator().HasNext())
+            {
+
+                Item tempItem = (Item)tempFinances.Iterator().Next();
+
+                if (tempItem.GetItemType() == ITEM_TYPE.Expense)
+                {
+                    Expense tempExp = (Expense)tempItem;
+
+                    if (tempExp.GetDate() < goalDate)
+                    {
+
+                        sumOfExpenses += tempExp.GetAmount();
+
+                    }
 
                 }
 
@@ -274,6 +352,47 @@ namespace Budget.ly
 
         }
 
+        static public float TotalIncomeInGoalRange(Account account)
+        {
+
+            DateTime goalDate = account.GetGoal().GetDate();
+            DateTime currDate = DateTime.Now;
+            int dayRange = (goalDate.Date - currDate.Date).Days;
+
+            float sumOfIncome = 0;
+
+            Items tempFinances = account.GetFinances();
+
+            while (tempFinances.Iterator().HasNext())
+            {
+
+                Item tempItem = (Item)tempFinances.Iterator().Next();
+
+                if (tempItem.GetItemType() == ITEM_TYPE.Income)
+                {
+                    Income tempIncome = (Income)tempItem;
+
+                    if (tempIncome.GetDate() < goalDate)
+                    {
+
+                        sumOfIncome += tempIncome.GetAmount();
+
+                    }
+
+                }
+
+            }
+
+            if (sumOfIncome == 0)
+            {
+                return 0;
+            }
+
+            return sumOfIncome;
+
+        }
+
+
         static public float TotalGain(Account account)
         {
 
@@ -291,6 +410,47 @@ namespace Budget.ly
                 {
 
                     sumOfGain += tempItem.GetAmount();
+
+                }
+
+            }
+
+            if (sumOfGain == 0)
+            {
+                return 0;
+            }
+
+            return sumOfGain;
+
+        }
+
+        static public float TotalGainInGoalRange(Account account)
+        {
+
+            DateTime goalDate = account.GetGoal().GetDate();
+            DateTime currDate = DateTime.Now;
+            int dayRange = (goalDate.Date - currDate.Date).Days;
+
+            float sumOfGain = 0;
+
+            Items tempFinances = account.GetFinances();
+
+
+            while (tempFinances.Iterator().HasNext())
+            {
+
+                Item tempItem = (Item)tempFinances.Iterator().Next();
+
+                if (tempItem.GetItemType() == ITEM_TYPE.Gain)
+                {
+                    Gain tempGain = (Gain)tempItem;
+
+                    if (tempGain.GetDate() < goalDate)
+                    {
+
+                        sumOfGain += tempGain.GetAmount();
+
+                    }
 
                 }
 
