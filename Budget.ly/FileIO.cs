@@ -48,9 +48,7 @@ namespace Budget.ly
 
                     string[] words = line.Split(" ");
 
-
                     newAcc = new (words[0], words[1], float.Parse(words[2]));
-
 
                     Goal goal = new(words[3], float.Parse(words[5]), DateFromString(words[4]));
 

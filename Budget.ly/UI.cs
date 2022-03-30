@@ -30,12 +30,17 @@ namespace Budget.ly
 
             Console.WriteLine("Enter in first name: ");
             string firstName = Console.ReadLine();
+
             Console.WriteLine("Enter in last name: ");
             string lastName = Console.ReadLine();
+
             Console.WriteLine("Enter in your account balance: ");
             float acctBalance = float.Parse(Console.ReadLine());
 
             this.account = new Account(firstName, lastName, acctBalance);
+
+            Console.WriteLine("Enter in your Goal details: ");
+            createAGoal(getLabel(), getAmount(), getDate());
 
             AccountHandler newAccountHandler = new(this.account);
 
@@ -49,10 +54,10 @@ namespace Budget.ly
 
             do
             {
-                Console.WriteLine("Budget.ly - Budget Goal Software\n\n");
+                Console.WriteLine("Budget.ly - Budget Goal Software\n---------------------------------------------\n");
                 if (this.account.GetGoal() != null)
                 {
-                    Console.WriteLine("Balance: ${0}\nGoal Target: ${1}\n", account.GetBalance(), account.GetGoal().GetTargetAmount());
+                    Console.WriteLine("Balance: ${0} | Target Amount: ${1}\n", account.GetBalance(), account.GetGoal().GetTargetAmount());
                     Console.WriteLine("Goal: {0}", GoalStatus());
                     Console.WriteLine("You will reach your goal in {0} days\n", MoneyTracker.CalculateDaysToReachGoal(this.account));
                 }
@@ -60,7 +65,7 @@ namespace Budget.ly
                 {
 
                     Console.WriteLine("Goal: Not set.\n");
-                    Console.WriteLine("Balance: ${0} Goal Target: Not set.\n", account.GetBalance());
+                    Console.WriteLine("Balance: ${0} |  Target Amount: Not set.\n", account.GetBalance());
 
                     Console.WriteLine("Enter a goal to receive financial advice.\n");
 
@@ -68,7 +73,7 @@ namespace Budget.ly
                 
                 Console.WriteLine("Avg Bill: ${0}\nAvg Income: ${1}\nAvg Expense: ${2}\nAvg Gain: ${3}\n", averageBill(), averageIncome(), averageExpense(), averageGain());
                 Console.WriteLine("Total Bill: ${0}\nTotal Income: ${1}\nTotal Expense: ${2}\nTotal Gain: ${3}\n", totalBill(), totalIncome(), totalExpense(), totalGain());
-                Console.WriteLine("\t1] Add Expense\n\t2] Add Gain\n\t3] Add Income\n\t4] Add Bill\n\t5] Set a goal\n\t0] Exit\n\t");
+                Console.WriteLine("\t1) Add Expense\n\t2) Add Gain\n\t3) Add Income\n\t4) Add Bill\n\t5) Set a goal\n\t0) Exit\n\t");
 
                 isRunning = optionSelect();
 
@@ -127,9 +132,7 @@ namespace Budget.ly
                     case 5:
                         createAGoal(getLabel(), getAmount(), getDate());
                         break;
-                    //case 6:
-                    //    viewRecurringIncome();
-                    //    break;
+
                     case 0:
                         terminate();
                         return false;
@@ -264,16 +267,6 @@ namespace Budget.ly
             } while (!isDigit);
 
             return interval;
-
-        }
-
-        private void viewRecurringBill()
-        {
-        
-        }
-
-        private void viewRecurringIncome()
-        {
 
         }
 
