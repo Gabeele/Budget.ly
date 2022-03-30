@@ -73,7 +73,7 @@ namespace Budget.ly
                 
                 Console.WriteLine("Avg Bill: ${0}\nAvg Income: ${1}\nAvg Expense: ${2}\nAvg Gain: ${3}\n", averageBill(), averageIncome(), averageExpense(), averageGain());
                 Console.WriteLine("Total Bill: ${0}\nTotal Income: ${1}\nTotal Expense: ${2}\nTotal Gain: ${3}\n", totalBill(), totalIncome(), totalExpense(), totalGain());
-                Console.WriteLine("\t1) Add Expense\n\t2) Add Gain\n\t3) Add Income\n\t4) Add Bill\n\t5) Set a goal\n\t0) Exit\n\t");
+                Console.WriteLine("\t1) Add Expense\n\t2) Add Gain\n\t3) Add Income\n\t4) Add Bill\n\t5) Set a goal\n\t6) Set a balance\n\t0) Exit\n\t");
 
                 isRunning = optionSelect();
 
@@ -132,6 +132,9 @@ namespace Budget.ly
                     case 5:
                         createAGoal(getLabel(), getAmount(), getDate());
                         break;
+                    case 6:
+                        setBalance(getAmount());
+                        break;
 
                     case 0:
                         terminate();
@@ -145,6 +148,11 @@ namespace Budget.ly
             } while (rerun);
 
             return true;
+        }
+
+        private void setBalance(float balance)
+        {
+            this.account.SetBalance(balance);
         }
 
         private string GoalStatus()
