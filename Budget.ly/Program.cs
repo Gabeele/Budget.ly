@@ -9,9 +9,10 @@ namespace Budget.ly
         {
   
             Account account = FileIO.ReadFromFile();
+            
             if (account != null)
             {
-
+                account.GetAccountHistory().AddMilestone(account.GetFinances().createMemento());  //Creates the base memento
                 UI newUI = new(account);
                 newUI.PrintMenu();
 

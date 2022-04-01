@@ -14,7 +14,7 @@ namespace Budget.ly
         private float accountBalance;
         private Goal goal;
         private Items finances;
-        private AccountHistory accountHistory;
+        private ItemHistory history;
         private List<IObserver> observers;
 
         public Account()
@@ -23,7 +23,7 @@ namespace Budget.ly
             this.accountBalance = 0;
             this.goal = null;
             this.finances = new Items();
-            this.accountHistory = new AccountHistory() { };
+            this.history = new ItemHistory() { };
             observers = new List<IObserver>();
 
         }
@@ -34,12 +34,12 @@ namespace Budget.ly
             this.accountBalance = accountBalance;
             this.goal = null;
             this.finances = new Items();
-            this.accountHistory = new AccountHistory() { };
+            this.history = new ItemHistory() { };
             observers = new List<IObserver>();
 
         }
 
-        public Account(string firstName, string lastName, float accountBalance, Goal goal, Items finances, AccountHistory accountHistory) : base(firstName, lastName)
+        public Account(string firstName, string lastName, float accountBalance, Goal goal, Items finances, ItemHistory history) : base(firstName, lastName)
         {
 
             this.accountBalance = accountBalance;
@@ -47,11 +47,12 @@ namespace Budget.ly
             this.finances = new Items();
             this.finances = finances;
 
-            this.accountHistory = new AccountHistory() { };
-            this.accountHistory = accountHistory;
+            this.history = new ItemHistory() { };
+            this.history = history;
 
 
             observers = new List<IObserver>();
+           
 
         }
 
@@ -124,32 +125,25 @@ namespace Budget.ly
 
         }
 
-        public void SetAccountHistory(AccountHistory accountHistory)
+        public void add(Item item)
+        {
+            
+            this.finances.add(item);
+            history.AddMilestone(this.finances.createMemento());
+            NotfiyObservers();
+        }
+
+        public void SetItemHistory(ItemHistory history)
         {
 
-            this.accountHistory = accountHistory;
+            this.history = history;
 
         }
 
-        public AccountHistory GetAccountHistory()
+        public ItemHistory GetAccountHistory()
         {
 
-            return this.accountHistory;
-
-        }
-
-        private void CreateMilestone()
-        {
-
-            Milestone milestone = new (this.accountBalance);
-            this.accountHistory.AddMilestone(milestone);
-
-        }
-
-        public void UpdateHistory()
-        {
-
-            CreateMilestone();
+            return this.history;
 
         }
 

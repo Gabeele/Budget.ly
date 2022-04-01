@@ -8,26 +8,25 @@ namespace Budget.ly
 {
     public class Milestone
     {
-        private float accountBalance;
+        private List<Item> list;
 
-        public Milestone(float accountBalance)
+        public Milestone(List<Item> list)
         {
 
-            this.accountBalance = accountBalance;
+            this.list = list;
 
         }
 
-        public void SetAccountBalance(float accountBalance)
+        public void SetList(List<Item> list)
         {
-            
-            this.accountBalance = accountBalance;
+            this.list = list;
 
         }
 
-        public float GetAccountBalance()
+        public List<Item> GetList()
         {
 
-            return this.accountBalance;
+            return this.list;
 
         }
 

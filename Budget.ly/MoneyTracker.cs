@@ -9,58 +9,86 @@ namespace Budget.ly
     static public class MoneyTracker
     {
 
-        static public int CalculateDaysToReachGoal(Account account)
+        static public int CalculateDaysToGoal(Account account)
         {
 
-            if (account.GetBalance() > account.GetGoal().GetTargetAmount())
+            Items tempFinances = account.GetFinances();
+
+            IIterator tempIterator = tempFinances.Iterator();
+
+            float sumRecurring = 0;
+            float sum = 0;
+
+            int numDays = 0;
+
+            while (tempIterator.HasNext())
             {
+                Item tempItem = (Item)tempIterator.Next();
 
-                //Already have enough in the account.
-                return 0;
-
-            }
-
-            //If the goal is attainable, how many days will it take to get there based on current balance and projected cash flows.
-            if (IsGoalAttainable(account))
-            {
-
-                DateTime tempGoalDate = account.GetGoal().GetDate();
-                DateTime currDate = DateTime.Now;
-                TimeSpan diff = tempGoalDate.Subtract(currDate);
-                int timeSpan = diff.Days;
-
-                float reoccuringCashFlowInRange = (TotalIncomeInGoalRange(account) - TotalBillInGoalRange(account));
-                float oneTimeCashFlowInRange = (TotalGainInGoalRange(account) - TotalExpenseInGoalRange(account));
-
-                float cashflowsPerDay = (reoccuringCashFlowInRange + oneTimeCashFlowInRange) / timeSpan;
-
-                float tempBalance = account.GetBalance();
-                int dayCounter = 0;
-
-                while (tempBalance < account.GetGoal().GetTargetAmount())
+                if (tempItem.GetItemType() == ITEM_TYPE.Income)
                 {
+                    Income income = (Income)tempItem;
 
-                    tempBalance += cashflowsPerDay;
-                    dayCounter++;
+
+                    sumRecurring += income.GetAmount() * income.GetBillInterval();
 
                 }
 
-                return dayCounter;
+                else if (tempItem.GetItemType() == ITEM_TYPE.Bill)
+                {
+                    Bill income = (Bill)tempItem;
+
+
+                    sumRecurring -= income.GetAmount() * income.GetBillInterval();
+
+                }
+                else if (tempItem.GetItemType() == ITEM_TYPE.Expense)
+                {
+                    Expense expense = (Expense)tempItem;
+
+
+                    sum -= expense.GetAmount();
+
+                }
+                else if (tempItem.GetItemType() == ITEM_TYPE.Gain)
+                {
+                    Gain gain = (Gain)tempItem;
+
+
+                    sum += gain.GetAmount();
+
+                }
 
             }
 
-            else
+            float reoccuringPerDay;
+
+            float tempbalance = account.GetBalance();
+
+            tempbalance += sum;
+
+            reoccuringPerDay = (float)(sumRecurring / 30.00);
+
+            while (tempbalance < account.GetGoal().GetTargetAmount())
             {
 
-                return -1;
+                tempbalance += reoccuringPerDay;
+                numDays++;
+
+                if (tempbalance <= 0 || reoccuringPerDay == 0)
+                {
+                    return -1;
+
+                }
 
             }
 
+            return numDays;
         }
 
         static public bool IsGoalAttainable(Account account)
         {
-           
+
             float currBalance = account.GetBalance();
 
             float reoccuringCashFlowInRange = (TotalIncomeInGoalRange(account) - TotalBillInGoalRange(account));
@@ -68,7 +96,7 @@ namespace Budget.ly
 
             //Needs to compare against goal target amount
             if ((currBalance + reoccuringCashFlowInRange + oneTimeCashFlowInRange) > account.GetGoal().GetTargetAmount())
-                
+
             {
                 return true;
 
@@ -102,7 +130,7 @@ namespace Budget.ly
             {
 
                 Item tempItem = (Item)tempIterator.Next();
-       
+
                 if (tempItem.GetItemType() == ITEM_TYPE.Bill)
                 {
 
@@ -113,7 +141,7 @@ namespace Budget.ly
 
             }
 
-            if(numBills == 0)
+            if (numBills == 0)
             {
                 return 0;
             }
@@ -255,7 +283,7 @@ namespace Budget.ly
 
             DateTime goalDate = account.GetGoal().GetDate();
             DateTime currDate = DateTime.Now;
-          
+
             float sumOfBills = 0;
 
             Items tempFinances = account.GetFinances();

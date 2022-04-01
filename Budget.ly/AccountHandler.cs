@@ -20,7 +20,7 @@ namespace Budget.ly
         public void Update()
         {
 
-            FileIO.write(acc);  //TODO for some reason it is not calling
+            FileIO.write(acc);  
 
         }
                

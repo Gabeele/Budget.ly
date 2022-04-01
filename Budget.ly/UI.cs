@@ -46,11 +46,14 @@ namespace Budget.ly
 
             Console.Clear();
 
+            account.GetAccountHistory().AddMilestone(account.GetFinances().createMemento());
+
         }
 
         public bool PrintMenu()
         {
             bool isRunning = true;
+
 
             do
             {
@@ -59,7 +62,15 @@ namespace Budget.ly
                 {
                     Console.WriteLine("Balance: ${0} | Target Amount: ${1}\n", account.GetBalance(), account.GetGoal().GetTargetAmount());
                     Console.WriteLine("Goal: {0}", GoalStatus());
-                    Console.WriteLine("You will reach your goal in {0} days\n", MoneyTracker.CalculateDaysToReachGoal(this.account));
+                    if(MoneyTracker.CalculateDaysToGoal(this.account) != -1)
+                    {
+                        Console.WriteLine("You will reach your goal in {0} days\n", MoneyTracker.CalculateDaysToGoal(this.account));
+                    }
+                    else
+                    {
+                        Console.WriteLine("Goal is currently unattainable\n");
+                    }
+                    
                 }
                 else if (this.account.GetGoal() == null)
                 {
@@ -73,7 +84,7 @@ namespace Budget.ly
                 
                 Console.WriteLine("Avg Bill: ${0}\nAvg Income: ${1}\nAvg Expense: ${2}\nAvg Gain: ${3}\n", averageBill(), averageIncome(), averageExpense(), averageGain());
                 Console.WriteLine("Total Bill: ${0}\nTotal Income: ${1}\nTotal Expense: ${2}\nTotal Gain: ${3}\n", totalBill(), totalIncome(), totalExpense(), totalGain());
-                Console.WriteLine("\t1) Add Expense\n\t2) Add Gain\n\t3) Add Income\n\t4) Add Bill\n\t5) Set a goal\n\t6) Set a balance\n\t0) Exit\n\t");
+                Console.WriteLine("\t1) Add Expense\n\t2) Add Gain\n\t3) Add Income\n\t4) Add Bill\n\t5) Set a goal\n\t6) Set a balance\n\t7) Show History\n\t8) Undo\n\t0) Exit\n\t");
 
                 isRunning = optionSelect();
 
@@ -136,6 +147,12 @@ namespace Budget.ly
                         setBalance(getAmount());
                         break;
 
+                    case 7:
+                        displayHistory();
+                        break;
+                    case 8:
+                        undoItem();
+                        break;
                     case 0:
                         terminate();
                         return false;
@@ -148,6 +165,16 @@ namespace Budget.ly
             } while (rerun);
 
             return true;
+        }
+
+        private void undoItem()
+        {
+            account.GetFinances().restoreMemento(account.GetAccountHistory().undo());
+        }
+
+        private void displayHistory()
+        {
+            throw new NotImplementedException();
         }
 
         private void setBalance(float balance)
@@ -181,14 +208,14 @@ namespace Budget.ly
         {
 
             Expense exp = new Expense(amount, label , date);
-            account.GetFinances().add(exp);
+            account.add(exp);
         }
 
         private void addIncome(float amount, string label, DateTime date, int interval)
         {
 
             Income inc = new Income(amount, label, date, interval);
-            account.GetFinances().add(inc);
+            account.add(inc);
 
         }
 
@@ -196,14 +223,14 @@ namespace Budget.ly
         {
 
             Bill b = new Bill(amount, label, date, interval);
-            account.GetFinances().add(b);
+            account.add(b);
 
         }
 
         private void addGainz(float amount, string label, DateTime date)
         {
             Gain gain = new Gain(amount, label, date);
-            account.GetFinances().add(gain);
+            account.add(gain);
 
         }
 
@@ -241,13 +268,13 @@ namespace Budget.ly
         private DateTime getDate()
         {
            
-            Console.Write("Enter the month of receipt/payment (1-12): ");
+            Console.Write("Enter the month (1-12): ");
             int month = int.Parse(Console.ReadLine());
 
-            Console.Write("Enter the day of receipt/payment (1-31): ");
+            Console.Write("Enter the day (1-31): ");
             int day = int.Parse(Console.ReadLine());
 
-            Console.Write("Enter the year of receipt/payment: ");
+            Console.Write("Enter the year: ");
             int year = int.Parse(Console.ReadLine());
 
             DateTime date = new DateTime(year, month, day);
