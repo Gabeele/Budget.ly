@@ -8,27 +8,23 @@ namespace Budget.ly
 {
     public class Milestone
     {
-        private List<Item> list;
+        private List<Items> list;
 
-        public Milestone(List<Item> list)
+        public Milestone(Items list)
         {
-
-            this.list = list;
+            this.list = new List<Items> {};
+            this.list.Add(list);
 
         }
 
-        public void SetList(List<Item> list)
-        {
-            this.list = list;
+        //public Items GetRecent()
+        //{
 
-        }
+        //    return this.list;
 
-        public List<Item> GetList()
-        {
+        //}
 
-            return this.list;
 
-        }
 
 
     }

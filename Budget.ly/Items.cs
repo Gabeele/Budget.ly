@@ -8,7 +8,35 @@ namespace Budget.ly
 {
     public class Items : IAggregate
     {
-        List<Item> items = new ();
+        List<Item> items;
+
+        public Items()
+        {
+
+            this.items = new List<Item>() { };
+
+        }
+
+        public Items(Items otherItems)
+        {
+
+            if (items == null)
+            {
+
+                otherItems.items = this.items;
+
+            }
+
+            else {
+
+                foreach (Item item in items)
+                {
+                    otherItems.add(item);
+                }
+
+            }
+
+        }
 
         public IIterator Iterator()
         {
@@ -20,6 +48,13 @@ namespace Budget.ly
             return items;
         }
 
+        public void SetItems(List<Item> list)
+        {
+
+            this.items = list;
+
+        }
+
         public void add(Item item)
         {
             items.Add(item);
@@ -28,17 +63,18 @@ namespace Budget.ly
 
         public Milestone createMemento()
         {
-            return new Milestone(items);
+            Items tempItem = new Items(this){};
+            return new Milestone(tempItem);
 
         }
 
-        public void restoreMemento(Object o)
-        {
+        //public void restoreMemento(Object o)
+        //{
             
-            Milestone m = (Milestone)o;
-            this.items = m.GetList();
+        //    Milestone m = (Milestone)o;
+        //    this.items = m.GetRecent();
 
-        }
+        //}
 
 
     }

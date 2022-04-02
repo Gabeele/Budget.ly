@@ -15,7 +15,7 @@ namespace Budget.ly
         public ItemHistory()
         {
 
-            this.itemsHistory = new List<Milestone>();
+            this.itemsHistory = new List<Milestone>() {};
 
         }
 

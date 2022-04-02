@@ -22,7 +22,7 @@ namespace Budget.ly
 
             this.accountBalance = 0;
             this.goal = null;
-            this.finances = new Items();
+            this.finances = new Items() { };
             this.history = new ItemHistory() { };
             observers = new List<IObserver>();
 
@@ -33,7 +33,7 @@ namespace Budget.ly
 
             this.accountBalance = accountBalance;
             this.goal = null;
-            this.finances = new Items();
+            this.finances = new Items() { };
             this.history = new ItemHistory() { };
             observers = new List<IObserver>();
 
@@ -44,7 +44,7 @@ namespace Budget.ly
 
             this.accountBalance = accountBalance;
             this.goal = goal;
-            this.finances = new Items();
+            this.finances = new Items() { };
             this.finances = finances;
 
             this.history = new ItemHistory() { };
@@ -127,9 +127,15 @@ namespace Budget.ly
 
         public void add(Item item)
         {
+            //make a new item list (Items) and copy values from current
+            Items tempfinances = new Items(this.finances);
+  
+            //make a milestone out of this templist, so that memory is different.
+            history.AddMilestone(tempfinances.createMemento());
+
+            //now add the item to the actual account item list (finances).
             
             this.finances.add(item);
-            history.AddMilestone(this.finances.createMemento());
             NotfiyObservers();
         }
 

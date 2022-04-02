@@ -46,8 +46,6 @@ namespace Budget.ly
 
             Console.Clear();
 
-            account.GetAccountHistory().AddMilestone(account.GetFinances().createMemento());
-
         }
 
         public bool PrintMenu()
@@ -169,7 +167,7 @@ namespace Budget.ly
 
         private void undoItem()
         {
-            account.GetFinances().restoreMemento(account.GetAccountHistory().undo());
+            //account.GetFinances().restoreMemento(account.GetAccountHistory().undo());
         }
 
         private void displayHistory()
