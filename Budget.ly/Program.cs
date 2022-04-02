@@ -12,7 +12,7 @@ namespace Budget.ly
             
             if (account != null)
             {
-                account.GetAccountHistory().AddMilestone(account.GetFinances().createMemento());  //Creates the base memento
+             
                 UI newUI = new(account);
                 newUI.PrintMenu();
 

@@ -26,20 +26,6 @@ namespace Budget.ly
             
         }
 
-        public Milestone createMemento()
-        {
-            return new Milestone(items);
-
-        }
-
-        public void restoreMemento(Object o)
-        {
-            
-            Milestone m = (Milestone)o;
-            this.items = m.GetList();
-
-        }
-
-
     }
+
 }

@@ -14,7 +14,7 @@ namespace Budget.ly
         private float accountBalance;
         private Goal goal;
         private Items finances;
-        private ItemHistory history;
+        private AccountHistory history;
         private List<IObserver> observers;
 
         public Account()
@@ -23,7 +23,7 @@ namespace Budget.ly
             this.accountBalance = 0;
             this.goal = null;
             this.finances = new Items();
-            this.history = new ItemHistory() { };
+            this.history = new AccountHistory() { };
             observers = new List<IObserver>();
 
         }
@@ -34,12 +34,12 @@ namespace Budget.ly
             this.accountBalance = accountBalance;
             this.goal = null;
             this.finances = new Items();
-            this.history = new ItemHistory() { };
+            this.history = new AccountHistory() { };
             observers = new List<IObserver>();
 
         }
 
-        public Account(string firstName, string lastName, float accountBalance, Goal goal, Items finances, ItemHistory history) : base(firstName, lastName)
+        public Account(string firstName, string lastName, float accountBalance, Goal goal, Items finances, AccountHistory history) : base(firstName, lastName)
         {
 
             this.accountBalance = accountBalance;
@@ -47,7 +47,7 @@ namespace Budget.ly
             this.finances = new Items();
             this.finances = finances;
 
-            this.history = new ItemHistory() { };
+            this.history = new AccountHistory() { };
             this.history = history;
 
 
@@ -127,20 +127,19 @@ namespace Budget.ly
 
         public void add(Item item)
         {
-            
+            CreateMemento();
             this.finances.add(item);
-            history.AddMilestone(this.finances.createMemento());
             NotfiyObservers();
         }
 
-        public void SetItemHistory(ItemHistory history)
+        public void SetAccountHistory(AccountHistory history)
         {
 
             this.history = history;
 
         }
 
-        public ItemHistory GetAccountHistory()
+        public AccountHistory GetAccountHistory()
         {
 
             return this.history;
@@ -151,6 +150,33 @@ namespace Budget.ly
         {
 
             return string.Format("{0} {1} {2} {3}", this.firstName, this.lastName, this.accountBalance.ToString(), this.goal.Stringify());
+
+        }
+
+        public Milestone CreateMemento()
+        {
+            Items tempItems = new Items() {};
+
+            IIterator tempIterator = this.finances.Iterator();
+            while (tempIterator.HasNext())
+            {
+
+                tempItems.add((Item)tempIterator.Next());
+
+            }
+ 
+            Milestone temp = new Milestone(tempItems);
+            history.AddMilestone(temp);
+            return temp;
+
+        }
+
+        public void Undo()
+        {
+
+            Milestone tempMilestone = history.Undo();
+            this.finances = tempMilestone.GetItemsFromList();
+            
 
         }
 

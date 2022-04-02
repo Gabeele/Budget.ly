@@ -6,39 +6,39 @@ using System.Threading.Tasks;
 
 namespace Budget.ly
 {
-    public class ItemHistory
+    public class AccountHistory
     {
 
-        private List<Milestone> itemsHistory;
+        private List<Milestone> accountHistory;
         int indexOfCurrentMilestone = -1;
 
-        public ItemHistory()
+        public AccountHistory()
         {
 
-            this.itemsHistory = new List<Milestone>();
+            this.accountHistory = new List<Milestone>();
 
         }
 
         public void AddMilestone(Milestone milestone)
         {
 
-            itemsHistory.Add(milestone);
+            accountHistory.Add(milestone);
             indexOfCurrentMilestone++;
 
         }
 
-        public Object undo()
+        public Milestone Undo()
         {
 
             if (indexOfCurrentMilestone <= 0)
 
             {
                 indexOfCurrentMilestone = 0;
-                return itemsHistory.ElementAt(indexOfCurrentMilestone);
+                return accountHistory.ElementAt(indexOfCurrentMilestone);
             }
 
             indexOfCurrentMilestone--;
-            return itemsHistory.ElementAt(indexOfCurrentMilestone);
+            return accountHistory.ElementAt(indexOfCurrentMilestone);
         }
 
     }
