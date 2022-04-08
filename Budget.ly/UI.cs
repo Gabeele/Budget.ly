@@ -84,7 +84,7 @@ namespace Budget.ly
                 
                 Console.WriteLine("Avg Bill: ${0}\nAvg Income: ${1}\nAvg Expense: ${2}\nAvg Gain: ${3}\n", averageBill(), averageIncome(), averageExpense(), averageGain());
                 Console.WriteLine("Total Bill: ${0}\nTotal Income: ${1}\nTotal Expense: ${2}\nTotal Gain: ${3}\n", totalBill(), totalIncome(), totalExpense(), totalGain());
-                Console.WriteLine("\t1) Add Expense\n\t2) Add Gain\n\t3) Add Income\n\t4) Add Bill\n\t5) Set a goal\n\t6) Set a balance\n\t7) Show History\n\t8) Undo\n\t0) Exit\n\t");
+                Console.WriteLine("\t1) Add Expense\n\t2) Add Gain\n\t3) Add Income\n\t4) Add Bill\n\t5) Set a goal\n\t6) Set a balance\n\t7) Undo\n\t0) Exit\n\t");
 
                 isRunning = optionSelect();
 
@@ -146,11 +146,7 @@ namespace Budget.ly
                     case 6:
                         setBalance(getAmount());
                         break;
-
                     case 7:
-                        displayHistory();
-                        break;
-                    case 8:
                         undoItem();
                         break;
                     case 0:
